@@ -1,0 +1,477 @@
+lockVersion: 2.0.0
+id: 336c311a-9d3c-45e0-9161-b68143cb54a5
+management:
+  docChecksum: 388bb8e38c65afd20740c1eca51dcf49
+  docVersion: 0.1.0
+  speakeasyVersion: 1.462.2
+  generationVersion: 2.486.1
+  releaseVersion: 0.2.1
+  configChecksum: 2c725515176ea502fecc990478935b5d
+features:
+  go:
+    additionalDependencies: 0.1.0
+    additionalProperties: 0.1.2
+    bigint: 0.0.2
+    constsAndDefaults: 0.1.6
+    core: 3.6.2
+    customSecuritySchemes: 0.1.0
+    decimal: 0.1.0
+    defaultEnabledRetries: 0.2.0
+    deprecations: 2.81.2
+    devContainers: 2.90.0
+    docs: 0.5.1
+    downloadStreams: 0.1.2
+    enums: 2.81.1
+    envVarSecurityUsage: 0.3.2
+    errorUnions: 0.1.0
+    errors: 2.83.0
+    examples: 2.81.3
+    flattening: 2.81.1
+    globalSecurity: 2.82.10
+    globalSecurityCallbacks: 0.1.0
+    globalServerURLs: 2.82.2
+    globals: 2.82.2
+    groups: 2.81.2
+    hiddenGlobals: 0.1.0
+    includes: 2.81.1
+    intellisenseMarkdownSupport: 0.1.0
+    methodSecurity: 2.82.2
+    methodServerURLs: 2.82.1
+    mockServer: 0.1.0
+    nameOverrides: 2.81.2
+    openEnums: 0.1.0
+    operationTimeout: 0.2.0
+    pagination: 2.82.2
+    responseFormat: 0.1.2
+    retries: 2.83.1
+    sdkHooks: 0.1.0
+    serverEvents: 0.1.2
+    serverEventsSentinels: 0.1.0
+    serverIDs: 2.81.1
+    tests: 0.10.1
+    unions: 2.85.10
+    uploadStreams: 0.1.0
+    webhooks: 1.0.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - /models/apierrors/badrequestresponse.go
+  - /models/apierrors/error.go
+  - /models/apierrors/getunionerrors.go
+  - /models/apierrors/test2response.go
+  - /models/components/baseuser.go
+  - /models/components/circularunion.go
+  - /models/components/color.go
+  - /models/components/disriminatedunionwithonemember.go
+  - /models/components/enum.go
+  - /models/components/errortype1.go
+  - /models/components/errortype2.go
+  - /models/components/exhaustiveobject.go
+  - /models/components/file.go
+  - /models/components/httpmetadata.go
+  - /models/components/metadata.go
+  - /models/components/oneofwithfactoredoutproperties.go
+  - /models/components/security.go
+  - /models/components/simpleobject.go
+  - /models/components/taggederror1.go
+  - /models/components/taggederror2.go
+  - /models/components/test2request.go
+  - /models/components/test2response.go
+  - /models/components/user.go
+  - /models/operations/chat.go
+  - /models/operations/createuser.go
+  - /models/operations/deleteuser.go
+  - /models/operations/deprecated1.go
+  - /models/operations/getbinarydefaultresponse.go
+  - /models/operations/getfullyflattenedrequest.go
+  - /models/operations/getpolymorphism.go
+  - /models/operations/getrequestbodyflattenedaway.go
+  - /models/operations/getunionerrors.go
+  - /models/operations/getuser.go
+  - /models/operations/listtest1.go
+  - /models/operations/operationwithleadingandtrailingunderscores.go
+  - /models/operations/postfile.go
+  - /models/operations/posttest2.go
+  - /models/operations/testendpoint.go
+  - /models/operations/updateuser.go
+  - /models/webhooks/paymentcreated.go
+  - /models/webhooks/paymentupdated.go
+  - CONTRIBUTING.md
+  - USAGE.md
+  - docs/models/apierrors/badrequestresponse.md
+  - docs/models/apierrors/detail.md
+  - docs/models/apierrors/error.md
+  - docs/models/apierrors/getunionerrorsresponsebody.md
+  - docs/models/apierrors/getunionerrorsresponseresponsebody.md
+  - docs/models/apierrors/test2response.md
+  - docs/models/apierrors/two.md
+  - docs/models/components/any.md
+  - docs/models/components/baseuser.md
+  - docs/models/components/circularunion.md
+  - docs/models/components/color.md
+  - docs/models/components/disriminatedunionwithonemember.md
+  - docs/models/components/enum.md
+  - docs/models/components/error.md
+  - docs/models/components/errortype1.md
+  - docs/models/components/errortype2.md
+  - docs/models/components/errortype2error.md
+  - docs/models/components/exhaustiveobject.md
+  - docs/models/components/exhaustiveobjectany.md
+  - docs/models/components/exhaustiveobjectherowidth.md
+  - docs/models/components/exhaustiveobjecticon.md
+  - docs/models/components/exhaustiveobjectint32enum.md
+  - docs/models/components/exhaustiveobjectintenum.md
+  - docs/models/components/exhaustiveobjectnullableintenum.md
+  - docs/models/components/exhaustiveobjectnullablestringenum.md
+  - docs/models/components/file.md
+  - docs/models/components/herowidth.md
+  - docs/models/components/httpmetadata.md
+  - docs/models/components/icon.md
+  - docs/models/components/int32enum.md
+  - docs/models/components/intenum.md
+  - docs/models/components/metadata.md
+  - docs/models/components/nullableintenum.md
+  - docs/models/components/nullablestringenum.md
+  - docs/models/components/oneofwithfactoredoutproperties.md
+  - docs/models/components/oneofwithfactoredoutpropertiesexhaustiveobject.md
+  - docs/models/components/oneofwithfactoredoutpropertiessimpleobject.md
+  - docs/models/components/security.md
+  - docs/models/components/securityoption1.md
+  - docs/models/components/securityoption2.md
+  - docs/models/components/securityoption3.md
+  - docs/models/components/securityoption4.md
+  - docs/models/components/securityoption5.md
+  - docs/models/components/simpleobject.md
+  - docs/models/components/tag.md
+  - docs/models/components/taggederror1.md
+  - docs/models/components/taggederror2.md
+  - docs/models/components/test2request.md
+  - docs/models/components/test2response.md
+  - docs/models/components/type.md
+  - docs/models/components/user.md
+  - docs/models/operations/allofwithfactoredoutproperties.md
+  - docs/models/operations/chatchatstream.md
+  - docs/models/operations/chatrequestbody.md
+  - docs/models/operations/chatresponse.md
+  - docs/models/operations/createuserresponse.md
+  - docs/models/operations/data.md
+  - docs/models/operations/deleteuserrequest.md
+  - docs/models/operations/deleteuserresponse.md
+  - docs/models/operations/deprecated1response.md
+  - docs/models/operations/emoji.md
+  - docs/models/operations/getbinarydefaultresponseresponse.md
+  - docs/models/operations/getfullyflattenedrequestrequest.md
+  - docs/models/operations/getfullyflattenedrequestrequestbody.md
+  - docs/models/operations/getfullyflattenedrequestresponse.md
+  - docs/models/operations/getfullyflattenedrequestsecurity.md
+  - docs/models/operations/getpolymorphismresponse.md
+  - docs/models/operations/getpolymorphismresponsebody.md
+  - docs/models/operations/getrequestbodyflattenedawayglobals.md
+  - docs/models/operations/getrequestbodyflattenedawayrequest.md
+  - docs/models/operations/getrequestbodyflattenedawayresponse.md
+  - docs/models/operations/getunionerrorsrequest.md
+  - docs/models/operations/getunionerrorsresponse.md
+  - docs/models/operations/getunionerrorsresponsebody.md
+  - docs/models/operations/getuserrequest.md
+  - docs/models/operations/getuserresponse.md
+  - docs/models/operations/listtest1globals.md
+  - docs/models/operations/listtest1request.md
+  - docs/models/operations/listtest1response.md
+  - docs/models/operations/listtest1responsebody.md
+  - docs/models/operations/listtest1security.md
+  - docs/models/operations/oneofwithuniondescription.md
+  - docs/models/operations/operationwithleadingandtrailingunderscoresresponse.md
+  - docs/models/operations/option.md
+  - docs/models/operations/postfilerequestbody.md
+  - docs/models/operations/postfileresponse.md
+  - docs/models/operations/posttest2globals.md
+  - docs/models/operations/posttest2request.md
+  - docs/models/operations/posttest2response.md
+  - docs/models/operations/queryparam2.md
+  - docs/models/operations/resultarray.md
+  - docs/models/operations/simpleallof.md
+  - docs/models/operations/testendpointrequest.md
+  - docs/models/operations/testendpointrequestbody.md
+  - docs/models/operations/testendpointresponse.md
+  - docs/models/operations/updateuserrequest.md
+  - docs/models/operations/updateuserresponse.md
+  - docs/models/webhooks/paymentcreatedrequestbody.md
+  - docs/models/webhooks/paymentcreatedresponse.md
+  - docs/models/webhooks/paymentupdatedrequestbody.md
+  - docs/models/webhooks/paymentupdatedresponse.md
+  - docs/models/webhooks/paymentupdatedtype.md
+  - docs/models/webhooks/type.md
+  - docs/sdks/sdk/README.md
+  - docs/sdks/tag1/README.md
+  - docs/sdks/tag2/README.md
+  - docs/sdks/tag3/README.md
+  - docs/sdks/testgroup/README.md
+  - docs/types/date.md
+  - go.mod
+  - internal/globals/globals.go
+  - internal/hooks/hooks.go
+  - internal/utils/contenttype.go
+  - internal/utils/env.go
+  - internal/utils/form.go
+  - internal/utils/headers.go
+  - internal/utils/json.go
+  - internal/utils/pathparams.go
+  - internal/utils/queryparams.go
+  - internal/utils/requestbody.go
+  - internal/utils/retries.go
+  - internal/utils/security.go
+  - internal/utils/utils.go
+  - models/apierrors/apierror.go
+  - models/operations/options.go
+  - retry/config.go
+  - sdk.go
+  - tag1.go
+  - tag2.go
+  - tag3.go
+  - testgroup.go
+  - tests/files.go
+  - tests/mockserver/Dockerfile
+  - tests/mockserver/Makefile
+  - tests/mockserver/README.md
+  - tests/mockserver/go.mod
+  - tests/mockserver/go.sum
+  - tests/mockserver/internal/handler/assert/contenttype.go
+  - tests/mockserver/internal/handler/assert/header.go
+  - tests/mockserver/internal/handler/assert/parameter.go
+  - tests/mockserver/internal/handler/assert/pointer.go
+  - tests/mockserver/internal/handler/assert/security.go
+  - tests/mockserver/internal/handler/doc.go
+  - tests/mockserver/internal/handler/generated_handler.go
+  - tests/mockserver/internal/handler/generated_handlers.go
+  - tests/mockserver/internal/handler/pathdeleteuserid.go
+  - tests/mockserver/internal/handler/pathgetbinarydefaultresponse.go
+  - tests/mockserver/internal/handler/pathgetdeprecated.go
+  - tests/mockserver/internal/handler/pathgetpolymorphism.go
+  - tests/mockserver/internal/handler/pathgetrequestbodyflattenedaway.go
+  - tests/mockserver/internal/handler/pathgettest1page.go
+  - tests/mockserver/internal/handler/pathgetunionerrors.go
+  - tests/mockserver/internal/handler/pathgetuserid.go
+  - tests/mockserver/internal/handler/pathpostfile.go
+  - tests/mockserver/internal/handler/pathpostfullyflattenedrequest.go
+  - tests/mockserver/internal/handler/pathposttest2.go
+  - tests/mockserver/internal/handler/pathpostuserid.go
+  - tests/mockserver/internal/handler/pathputuser.go
+  - tests/mockserver/internal/handler/values/files.go
+  - tests/mockserver/internal/logging/doc.go
+  - tests/mockserver/internal/logging/formats.go
+  - tests/mockserver/internal/logging/http_file.go
+  - tests/mockserver/internal/logging/http_logger.go
+  - tests/mockserver/internal/logging/levels.go
+  - tests/mockserver/internal/logging/logger.go
+  - tests/mockserver/internal/logging/oas_operation.go
+  - tests/mockserver/internal/logging/oas_operation_call.go
+  - tests/mockserver/internal/sdk/models/components/baseuser.go
+  - tests/mockserver/internal/sdk/models/components/circularunion.go
+  - tests/mockserver/internal/sdk/models/components/color.go
+  - tests/mockserver/internal/sdk/models/components/disriminatedunionwithonemember.go
+  - tests/mockserver/internal/sdk/models/components/enum.go
+  - tests/mockserver/internal/sdk/models/components/exhaustiveobject.go
+  - tests/mockserver/internal/sdk/models/components/file.go
+  - tests/mockserver/internal/sdk/models/components/httpmetadata.go
+  - tests/mockserver/internal/sdk/models/components/metadata.go
+  - tests/mockserver/internal/sdk/models/components/oneofwithfactoredoutproperties.go
+  - tests/mockserver/internal/sdk/models/components/security.go
+  - tests/mockserver/internal/sdk/models/components/simpleobject.go
+  - tests/mockserver/internal/sdk/models/components/test2request.go
+  - tests/mockserver/internal/sdk/models/components/test2response.go
+  - tests/mockserver/internal/sdk/models/components/user.go
+  - tests/mockserver/internal/sdk/models/operations/chat.go
+  - tests/mockserver/internal/sdk/models/operations/createuser.go
+  - tests/mockserver/internal/sdk/models/operations/deleteuser.go
+  - tests/mockserver/internal/sdk/models/operations/deprecated1.go
+  - tests/mockserver/internal/sdk/models/operations/getbinarydefaultresponse.go
+  - tests/mockserver/internal/sdk/models/operations/getfullyflattenedrequest.go
+  - tests/mockserver/internal/sdk/models/operations/getpolymorphism.go
+  - tests/mockserver/internal/sdk/models/operations/getrequestbodyflattenedaway.go
+  - tests/mockserver/internal/sdk/models/operations/getunionerrors.go
+  - tests/mockserver/internal/sdk/models/operations/getuser.go
+  - tests/mockserver/internal/sdk/models/operations/listtest1.go
+  - tests/mockserver/internal/sdk/models/operations/operationwithleadingandtrailingunderscores.go
+  - tests/mockserver/internal/sdk/models/operations/postfile.go
+  - tests/mockserver/internal/sdk/models/operations/posttest2.go
+  - tests/mockserver/internal/sdk/models/operations/testendpoint.go
+  - tests/mockserver/internal/sdk/models/operations/updateuser.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/badrequestresponse.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/error.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/errortype1.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/errortype2.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/getunionerrors.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/taggederror1.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/taggederror2.go
+  - tests/mockserver/internal/sdk/models/sdkerrors/test2response.go
+  - tests/mockserver/internal/sdk/models/webhooks/paymentcreated.go
+  - tests/mockserver/internal/sdk/models/webhooks/paymentupdated.go
+  - tests/mockserver/internal/sdk/types/bigint.go
+  - tests/mockserver/internal/sdk/types/date.go
+  - tests/mockserver/internal/sdk/types/datetime.go
+  - tests/mockserver/internal/sdk/types/decimal.go
+  - tests/mockserver/internal/sdk/types/pointers.go
+  - tests/mockserver/internal/sdk/types/stream/stream.go
+  - tests/mockserver/internal/sdk/utils/json.go
+  - tests/mockserver/internal/sdk/utils/reflect.go
+  - tests/mockserver/internal/sdk/utils/sort.go
+  - tests/mockserver/internal/server/doc.go
+  - tests/mockserver/internal/server/generated_handlers.go
+  - tests/mockserver/internal/server/internal_handlers.go
+  - tests/mockserver/internal/server/server.go
+  - tests/mockserver/internal/server/server_option.go
+  - tests/mockserver/internal/server/templates/log/index.html.tmpl
+  - tests/mockserver/internal/server/templates/log/operation.html.tmpl
+  - tests/mockserver/internal/server/templates/log/style.css.tmpl
+  - tests/mockserver/internal/tracking/requesttracker.go
+  - tests/mockserver/main.go
+  - tests/sdk_test.go
+  - tests/tag1_test.go
+  - tests/tag2_test.go
+  - tests/testclient.go
+  - types/bigint.go
+  - types/date.go
+  - types/datetime.go
+  - types/decimal.go
+  - types/pointers.go
+  - types/stream/stream.go
+examples:
+  _operation_with_leading_and_trailing_underscores_: {}
+  postFile:
+    speakeasy-default-post-file:
+      requestBody:
+        multipart/form-data: {"file": {}}
+      responses:
+        "415":
+          application/json: {"error": "some example error", "code": 2}
+        "200": {}
+  getPolymorphism:
+    speakeasy-default-get-polymorphism:
+      responses:
+        "200":
+          application/json: {"oneOfWithUnionDescription": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "7754.37", "enumProp": "First", "date": "2023-04-06", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 815677, "decimalStr": "7753.11", "obj": {"str": "example"}, "map": {}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "First", "color": "green", "icon": "tick", "heroWidth": 480}, "oneOfWithFactoredOutProperties": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "4039.85", "enumProp": "First", "date": "2023-08-21", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 367921, "decimalStr": "3125.86", "obj": {"str": "example"}, "map": {"key": {"str": "example"}}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "Third", "color": "green", "icon": "tick", "heroWidth": 480, "anExtraProperty": "example"}, "simpleAllOf": {"str": "example", "bool": true}, "allOfWithFactoredOutProperties": {"anOverridingProperty": "example", "anotherProperty": "example", "anExtraProperty": "example"}}
+  getUnionErrors:
+    "":
+      parameters:
+        query:
+          page: 12
+      responses:
+        "200":
+          application/json: {"pages": []}
+        "404":
+          application/json: {"error": "some example error", "code": 2}
+        "500":
+          application/json: {"error": {"message": "<value>"}}
+        4XX:
+          application/json: {"tag": "tag1", "error": "<value>"}
+  getRequestBodyFlattenedAway: {}
+  getFullyFlattenedRequest:
+    namedExampleThatIsntMatchedAcrossDifferentExamples:
+      parameters:
+        query:
+          lang: "en"
+      requestBody:
+        application/json: {"name": "<value>"}
+  testEndpoint:
+    speakeasy-default-test-endpoint:
+      parameters:
+        path:
+          testName: "<value>"
+      requestBody:
+        application/json: {"test": "<value>"}
+  createUser:
+    speakeasy-default-create-user:
+      requestBody:
+        application/json: {"id": "8ffac18c-7d88-4879-b057-e5f45b9ce7de", "email": "Creola.Kutch71@yahoo.com"}
+      responses:
+        "200":
+          application/json: {"id": "8ffac18c-7d88-4879-b057-e5f45b9ce7de", "email": "Caleigh.Maggio-Littel24@hotmail.com"}
+  getUser:
+    speakeasy-default-get-user:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"id": "8ffac18c-7d88-4879-b057-e5f45b9ce7de", "email": "Carolyne_Walsh@hotmail.com"}
+  updateUser:
+    speakeasy-default-update-user:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"id": "8ffac18c-7d88-4879-b057-e5f45b9ce7de", "email": "Micah.Stracke@gmail.com"}
+      responses:
+        "200":
+          application/json: {"id": "8ffac18c-7d88-4879-b057-e5f45b9ce7de", "email": "Adella_Mante78@gmail.com"}
+  deleteUser:
+    speakeasy-default-delete-user:
+      parameters:
+        path:
+          id: "<id>"
+  chat:
+    speakeasy-default-chat:
+      requestBody:
+        application/json: {"prompt": "What is the largest city in the world?"}
+  getBinaryDefaultResponse: {}
+  deprecated1: {}
+  listTest1:
+    speakeasy-default-list-test1:
+      parameters:
+        path:
+          page: 100
+        query:
+          queryParam1: "some example query param"
+          queryParam2: 1
+        header:
+          headerParam1: "some example header param"
+      responses:
+        "200":
+          application/json: {"resultArray": [{"test1": "some example response"}], "totalCount": 100, "type": "First"}
+        "400":
+          application/json: {"status_code": 400, "error": "Bad Request", "type_name": "RequestValidationError", "message": "Invalid Params"}
+        "500":
+          application/json: {"error": "some example error", "code": 2}
+  postTest2:
+    speakeasy-default-post-test2:
+      parameters:
+        query:
+          deprecatedQueryParam1: "some example query param"
+          deprecatedQueryParam2: "some example query param"
+      requestBody:
+        application/json: {"obj": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "4344.96", "enumProp": "First", "date": "2024-02-10", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 119171, "decimalStr": "4560.33", "obj": {"str": "example"}, "map": {"key": {"str": "example"}, "key1": {"str": "example"}, "key2": {"str": "example"}}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "Third", "color": "green", "icon": "tick", "heroWidth": 480}, "type": "type1"}
+      responses:
+        "200":
+          multipart/form-data: "0xFf47C5ff08"
+        "400":
+          application/json: {"status_code": 400, "error": "Bad Request", "type_name": "RequestValidationError", "message": "Invalid Params"}
+        "404":
+          application/json: {"error": "some example error", "code": 2}
+        "500":
+          application/json: {"test2": "some example response"}
+  paymentCreated:
+    speakeasy-default-payment-created:
+      requestBody:
+        application/json: {"amount": "444.52", "type": "payment.created"}
+  paymentUpdated:
+    speakeasy-default-payment-updated:
+      requestBody:
+        application/json: {"amount": "227.37", "type": "payment.updated"}
+generatedTests:
+  testEndpoint: "2025-01-06T10:41:49+10:00"
+  getUser: "2025-01-06T10:41:49+10:00"
+  getFullyFlattenedRequest: "2025-01-06T10:41:49+10:00"
+  postTest2: "2025-01-06T10:41:49+10:00"
+  postFile: "2025-01-06T10:41:49+10:00"
+  getPolymorphism: "2025-01-06T10:41:49+10:00"
+  getUnionErrors: "2025-01-06T10:41:49+10:00"
+  getRequestBodyFlattenedAway: "2025-01-06T10:41:49+10:00"
+  chat: "2025-01-06T10:41:49+10:00"
+  getBinaryDefaultResponse: "2025-01-06T10:41:49+10:00"
+  deprecated1: "2025-01-06T10:41:49+10:00"
+  listTest1: "2025-01-06T10:41:49+10:00"
+  createUser: "2025-01-06T10:41:49+10:00"
+  updateUser: "2025-01-06T10:41:49+10:00"
+  deleteUser: "2025-01-06T10:41:49+10:00"

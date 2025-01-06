@@ -1,0 +1,36 @@
+speakeasyVersion: 1.462.2
+sources:
+    SDK Review:
+        sourceNamespace: sdk-review
+        sourceRevisionDigest: sha256:057712bb7ce544d56c4273c79177b90966692b6af7c4c94cb1c1ec68456a3cb5
+        sourceBlobDigest: sha256:a03e01d956eb0ea9203df67b431cf5f6de28a58e4086768424f20d902a924d89
+        tags:
+            - latest
+            - 0.1.0
+targets:
+    sdk-platform-test:
+        source: SDK Review
+        sourceNamespace: sdk-review
+        sourceRevisionDigest: sha256:057712bb7ce544d56c4273c79177b90966692b6af7c4c94cb1c1ec68456a3cb5
+        sourceBlobDigest: sha256:a03e01d956eb0ea9203df67b431cf5f6de28a58e4086768424f20d902a924d89
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        SDK Review:
+            inputs:
+                - location: ./openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/tristan-test/sdk-platform-test/sdk-review
+    targets:
+        sdk-platform-test:
+            target: go
+            source: SDK Review
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/tristan-test/sdk-platform-test/sdk-review-go-code-samples
+                labelOverride:
+                    fixedValue: Go (SDK)
+                blocking: false
+            testing:
+                enabled: true

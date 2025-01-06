@@ -1,0 +1,15 @@
+# BaseUser
+
+
+## Fields
+
+| Field                                                       | Type                                                        | Required                                                    | Description                                                 | Example                                                     |
+| ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| `ID`                                                        | **string*                                                   | :heavy_minus_sign:                                          | N/A                                                         | 8ffac18c-7d88-4879-b057-e5f45b9ce7de                        |
+| `Email`                                                     | *string*                                                    | :heavy_check_mark:                                          | N/A                                                         |                                                             |
+| `FirstName`                                                 | **string*                                                   | :heavy_minus_sign:                                          | N/A                                                         |                                                             |
+| `LastName`                                                  | **string*                                                   | :heavy_minus_sign:                                          | N/A                                                         |                                                             |
+| `Age`                                                       | **float64*                                                  | :heavy_minus_sign:                                          | N/A                                                         |                                                             |
+| `PostalCode`                                                | **string*                                                   | :heavy_minus_sign:                                          | N/A                                                         |                                                             |
+| `AssociatedIds`                                             | []*string*                                                  | :heavy_minus_sign:                                          | N/A                                                         |                                                             |
+| `Metadata`                                                  | [*components.Metadata](../../models/components/metadata.md) | :heavy_minus_sign:                                          | N/A                                                         |                                                             |

@@ -1,0 +1,11 @@
+# ListTest1Request
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      | Example                                                          |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `QueryParam2`                                                    | [operations.QueryParam2](../../models/operations/queryparam2.md) | :heavy_check_mark:                                               | A enum query parameter.                                          | 1                                                                |
+| `Page`                                                           | *int64*                                                          | :heavy_check_mark:                                               | N/A                                                              | 100                                                              |
+| `HeaderParam1`                                                   | *string*                                                         | :heavy_check_mark:                                               | N/A                                                              | some example header param                                        |
+| `QueryParam1`                                                    | **string*                                                        | :heavy_minus_sign:                                               | N/A                                                              | some example query param                                         |

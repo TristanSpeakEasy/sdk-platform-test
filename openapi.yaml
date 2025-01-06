@@ -1,0 +1,1143 @@
+openapi: 3.1.0
+info:
+  title: SDK Review
+  version: 0.1.0
+  summary: A test document for reviewing the SDK.
+  description: |-
+    This document will show case as many of our features as possible in as little operations/models as possible.
+    This will then generate a SDK that we can more easily review than the test SDKs based on uber.yaml spec.
+externalDocs:
+  url: https://speakeasy.com/docs
+  description: Speakeasy Docs
+servers:
+  - url: http://localhost:35123
+    description: The default server.
+  - url: http://{hostname}:{port}
+    description: A server url with templated variables.
+    variables:
+      hostname:
+        default: localhost
+        description: The hostname of the server.
+      port:
+        default: "35123"
+        description: The port on which the server is running.
+x-speakeasy-globals:
+  parameters:
+    - name: queryParam1
+      description: |
+        A long winded, multi-line description
+        for the query parameter number one.
+      in: query
+      required: true
+      schema:
+        type: string
+        example: "some example query param"
+    - name: deprecatedQueryParam1
+      in: query
+      description: A deprecated description
+      deprecated: true
+      schema:
+        type: string
+        example: "some example query param"
+    - name: deprecatedQueryParam2
+      in: query
+      required: true
+      deprecated: true
+      schema:
+        type: string
+        example: "some example query param"
+    - $ref: "#/components/parameters/loneQueryParam"
+x-speakeasy-name-override:
+  - operationId: postTest2
+    methodNameOverride: postTest
+tags:
+  - name: tag1
+    description: The first tag.
+    x-speakeasy-docs:
+      go:
+        description: Testing for documentation extensions in Go.
+      python:
+        description: Testing for documentation extensions in Python.
+      typescript:
+        description: Testing for documentation extensions in TypeScript.
+security:
+  - basicHttp: []
+  - bearerAuth: []
+    apiKey: []
+  - oauth2: []
+  - customSchemeAppId: []
+  - mobileAuth: [read]
+  - {}
+paths:
+  /deprecated:
+    get:
+      operationId: deprecated1
+      tags:
+        - tag1
+      summary: Deprecated Operation
+      deprecated: true
+      x-speakeasy-deprecation-message: This endpoint is deprecated.
+      x-speakeasy-deprecation-replacement: getRequestBodyFlattenedAway
+      servers:
+        - url: http://localhost:12345
+          description: A deprecated server
+      responses:
+        "200":
+          description: OK
+  /test_operation_id_with_underscores:
+    get:
+      operationId: _operation_with_leading_and_trailing_underscores_
+      x-speakeasy-name-override: _operation_with_leading_and_trailing_underscores_
+      responses:
+        "200":
+          description: OK
+  /test1/{page}:
+    get:
+      operationId: listTest1
+      tags:
+        - tag1
+      summary: Get Test1
+      description: |-
+        This is a {{test}} endpoint.
+        It has a description.
+      x-speakeasy-timeout: 50000
+      x-speakeasy-usage-example:
+        title: "A custom readme heading"
+        description: "A custom usage description"
+        position: 2
+        tags:
+          - usage
+          - pagination
+      x-speakeasy-docs-rate-limits:
+        - strategy: sliding_window
+          sliding_window:
+            rate: 3
+            period: second
+          identifier: appID
+          description: Rate Limit 1 Description
+        - strategy: sliding_window
+          sliding_window:
+            rate: 100
+            period: minute
+          identifier: IP Address
+          description: Rate Limit 2 Description
+      security:
+        - apiKey: []
+      servers:
+        - url: http://localhost:35123
+          description: The only server.
+          x-speakeasy-server-id: Main
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: page
+            in: parameters
+            type: page
+        outputs:
+          results: $.resultArray
+      parameters:
+        - name: queryParam1
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "some {{example}} query param"
+        - name: queryParam2
+          description: A enum query parameter.
+          in: query
+          required: true
+          schema:
+            type: integer
+            enum: [0, 1, 2]
+            example: 1
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 100
+        - name: headerParam1
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "some example header param"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  resultArray:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        test1:
+                          type: string
+                          example: "some example response"
+                      required:
+                        - test1
+                  totalCount:
+                    type: integer
+                    example: 100
+                  type:
+                    $ref: "#/components/schemas/Enum"
+                required:
+                  - resultArray
+                  - totalCount
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /test2:
+    post:
+      operationId: postTest2
+      summary: Post Test2
+      x-speakeasy-group:
+        - testGroup.tag2
+        - testGroup.tag3
+      x-speakeasy-usage-example: true
+      description: |-
+        This is a test endpoint.
+        It has a description.
+      parameters:
+        - name: deprecatedQueryParam1
+          in: query
+          deprecated: true
+          schema:
+            type: string
+            example: "some {{example}} query param"
+        - name: deprecatedQueryParam2
+          in: query
+          deprecated: true
+          required: true
+          schema:
+            type: string
+            example: "some {{example}} query param"
+      servers:
+        - url: http://localhost:35123
+          description: The default server.
+          x-speakeasy-server-id: default
+        - url: http://{hostname}:{port}
+          description: A server url with templated variables.
+          variables:
+            port:
+              default: "35123"
+              description: The port on which the server is running.
+            hostname:
+              default: localhost
+              description: The hostname of the server.
+          x-speakeasy-server-id: templatable
+      security:
+        - {}
+      requestBody:
+        $ref: "#/components/requestBodies/Test2Request"
+      responses:
+        "200":
+          description: OK
+          content:
+            multipart/form-data:
+              schema:
+                $ref: "#/components/schemas/Test2Response"
+        default:
+          description: successful operation
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Test2Response"
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 10 # 10 ms
+          maxInterval: 200 # 200 ms
+          maxElapsedTime: 1000 # 1 seconds
+          exponent: 1.5
+        statusCodes:
+          - 404
+        retryConnectionErrors: false
+  /file:
+    post:
+      operationId: postFile
+      summary: Post File
+      description: |-
+        This is a test endpoint.
+        It has a description.
+      x-speakeasy-usage-example:
+        tags:
+          - usage
+          - security
+          - server
+          - retries # ignored since endpoint does not support retries
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  $ref: "#/components/schemas/File"
+              required:
+                - file
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                $ref: "#/components/schemas/File"
+        "415":
+          description: File too large
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "4XX":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "5XX":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /polymorphism:
+    get:
+      operationId: getPolymorphism
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  oneOfWithUnionDescription:
+                    description: "A union of two types."
+                    oneOf:
+                      - $ref: "#/components/schemas/ExhaustiveObject"
+                      - $ref: "#/components/schemas/SimpleObject"
+                    x-some-extension: "doesn't interfere with type generation"
+                  oneOfWithFactoredOutProperties:
+                    $ref: "#/components/schemas/OneOfWithFactoredOutProperties"
+                  simpleAllOf:
+                    allOf:
+                      - type: object
+                        properties:
+                          str:
+                            type: string
+                            description: "A string property."
+                            example: "example"
+                      - type: object
+                        properties:
+                          bool:
+                            type: boolean
+                            description: "A boolean property."
+                            example: true
+                  allOfWithFactoredOutProperties:
+                    description: "An object with allOf and factored out properties."
+                    properties:
+                      anExtraProperty:
+                        type: string
+                        description: "An extra property."
+                        example: "example"
+                      anOverridingProperty:
+                        type: string
+                        description: "An overriding property."
+                        example: "example"
+                    allOf:
+                      - type: object
+                        properties:
+                          anOverridingProperty:
+                            type: integer
+                            description: "An overriding property."
+                            example: 1
+                      - type: object
+                        properties:
+                          anOverridingProperty:
+                            type: number
+                            description: "An overriding property."
+                            example: 1.1
+                          anotherProperty:
+                            type: string
+                            description: "Another property."
+                            example: "example"
+                  circularUnion:
+                    $ref: "#/components/schemas/CircularUnion"
+  /unionErrors:
+    get:
+      operationId: getUnionErrors
+      x-speakeasy-usage-example:
+        tags:
+          - errors
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: page
+            in: parameters
+            type: page
+        outputs:
+          results: $.pages
+      x-speakeasy-react-hook:
+        disabled: true
+      parameters:
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 12
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pages:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - pages
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "4XX":
+          description: Something went wrong
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/TaggedError1"
+                  - $ref: "#/components/schemas/TaggedError2"
+                discriminator:
+                  propertyName: tag
+                  mapping:
+                    tag1: "#/components/schemas/TaggedError1"
+                    tag2: "#/components/schemas/TaggedError2"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/ErrorType1"
+                  - $ref: "#/components/schemas/ErrorType2"
+  /requestBodyFlattenedAway:
+    get:
+      operationId: getRequestBodyFlattenedAway
+      parameters:
+        - $ref: "#/components/parameters/loneQueryParam"
+      responses:
+        "200":
+          description: OK
+  /fullyFlattenedRequest:
+    post:
+      operationId: getFullyFlattenedRequest
+      security:
+        - apiKey: []
+        - {}
+      x-speakeasy-flatten-request: true
+      x-speakeasy-react-hook:
+        type: query
+        name: FlatRequest
+      parameters:
+        - name: lang
+          in: query
+          required: true
+          schema:
+            type: string
+          examples:
+            namedExampleThatIsntMatchedAcrossDifferentExamples:
+              value: "en"
+        - name: max_length
+          in: query
+          required: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                emoji:
+                  type: string
+                  enum: [wave, smiley, thumbsup, tada]
+                gif:
+                  type: string
+                reply:
+                  type: boolean
+                private:
+                  type: boolean
+        required: true
+      responses:
+        "200":
+          description: OK
+  /test/endpoint/{testName}:
+    post:
+      operationId: testEndpoint
+      parameters:
+        - name: testName
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                test:
+                  type: string
+              required:
+                - test
+        required: true
+      responses:
+        "200":
+          description: OK
+  /user:
+    put:
+      operationId: createUser
+      summary: Create User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BaseUser"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /user/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getUser
+      summary: Get User
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    post:
+      operationId: updateUser
+      summary: Update User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      responses:
+        "200":
+          description: OK
+  /chat:
+    post:
+      operationId: chat
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  example: "What is the largest city in the world?"
+        required: true
+      responses:
+        "200":
+          description: A stream containing chat completion tokens
+          content:
+            text/event-stream:
+              x-speakeasy-sse-sentinel: "[DONE]"
+              schema:
+                title: ChatStream
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: object
+                    required: [token]
+                    properties:
+                      content:
+                        type: string
+  /binaryDefaultResponse:
+    get:
+      operationId: getBinaryDefaultResponse
+      responses:
+        "200":
+          description: Import OK
+        default:
+          description: Error
+          content:
+            application/octet-stream:
+              schema:
+                title: bytes
+                type: string
+                format: binary
+x-speakeasy-webhooks:
+  security:
+    type: signature
+    headerName: x-webhook-signature
+    signatureTextEncoding: base64
+    algorithm: hmac-sha256
+webhooks:
+  payment-created:
+    post:
+      operationId: paymentCreated
+      x-speakeasy-group: hooks
+      summary: Send Payment Created Webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  description: Payment amount
+                type:
+                  type: string
+                  enum:
+                    - payment.created
+              required:
+                - amount
+                - type
+      responses:
+        "200":
+          description: Consumer's response
+  payment-updated:
+    post:
+      operationId: paymentUpdated
+      x-speakeasy-group: hooks
+      summary: Send Payment Updated Webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  description: Payment amount
+                type:
+                  type: string
+                  enum:
+                    - payment.updated
+              required:
+                - amount
+                - type
+      responses:
+        "200":
+          description: Consumer's response
+components:
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: api_key
+      in: header
+    basicHttp:
+      type: http
+      scheme: basic
+      x-speakeasy-example: <USERNAME>;<PASSWORD>
+    bearerAuth:
+      type: http
+      scheme: bearer
+      x-speakeasy-example: <YOUR_JWT>
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://localhost:35123/oauth2/authorize
+          scopes: {}
+      x-speakeasy-example: Bearer <YOUR_OAUTH2_TOKEN>
+    mobileAuth:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: http://localhost:35456/oauth2/token
+          scopes:
+            read: Read your data
+            write: Write to your data
+      x-speakeasy-example: Bearer <YOUR_OAUTH2_TOKEN>
+    customSchemeAppId:
+      type: http
+      scheme: custom
+      x-speakeasy-custom-security-scheme:
+        usesScopes: false
+        schema:
+          type: object
+          properties:
+            appId:
+              type: string
+              example: app-speakeasy-123
+            secret:
+              type: string
+              example: MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI
+          required:
+            - appId
+            - secret
+  schemas:
+    OneOfWithFactoredOutProperties:
+      description: "A union of two types with factored out properties."
+      properties:
+        anExtraProperty:
+          type: string
+          description: "An extra property."
+          example: "example"
+      oneOf:
+        - $ref: "#/components/schemas/ExhaustiveObject"
+        - $ref: "#/components/schemas/SimpleObject"
+    Error:
+      summary: |
+        A not-so-long multi-line
+        error model description.
+      type: object
+      properties:
+        error:
+          type: string
+          example: "some example error"
+          x-speakeasy-error-message: true
+        code:
+          type: integer
+          example: 2
+      required:
+        - error
+        - code
+    Test2Response:
+      type: object
+      properties:
+        test2:
+          type: string
+          example: "some example response"
+        someConst:
+          type: string
+          const: someConstValue
+    ExhaustiveObject:
+      description: "A simple object that uses all our supported primitive types and enums and has optional properties."
+      externalDocs:
+        description: "A link to the external docs."
+        url: "https://speakeasy.com"
+      type: object
+      properties:
+        str:
+          type: string
+          description: "A string property."
+          example: "example"
+        bool:
+          type: boolean
+          description: "A boolean property."
+          example: true
+        int:
+          type: integer
+          description: "An integer property."
+          example: 999999
+          x-speakeasy-name-override: integer
+        int32:
+          type: integer
+          format: int32
+          description: "An int32 property."
+          example: 1
+        num:
+          type: number
+          description: "A number property."
+          example: 1.1
+        float32:
+          type: number
+          format: float
+          description: "A float32 property."
+        enumProp:
+          $ref: "#/components/schemas/Enum"
+        date:
+          type: string
+          format: date
+          description: "A date property."
+        dateTime:
+          type: string
+          format: date-time
+          description: "A date-time property."
+          example: "2020-01-01T00:00:00Z"
+        anything:
+          description: "An any property."
+        strOpt:
+          type: string
+          description: "An optional string property."
+        boolOpt:
+          type: boolean
+          description: "An optional boolean property."
+          example: true
+        intOptNull:
+          type: integer
+          description: "An optional integer property will be null for tests."
+          example: 999999
+        numOptNull:
+          type: number
+          description: "An optional number property will be null for tests."
+          example: 1.1
+        intEnum:
+          type: integer
+          description: "An integer enum property."
+          enum:
+            - 1
+            - 2
+            - 3
+          example: 3
+          x-speakeasy-enums:
+            - First
+            - Second
+            - Third
+          default: 2
+        int32Enum:
+          type: integer
+          format: int32
+          description: "An int32 enum property."
+          enum:
+            - 55
+            - 69
+            - 181
+          example: 69
+        bigint:
+          type: integer
+          format: bigint
+        bigintStr:
+          type: string
+          format: bigint
+          default: "12345678901234567890"
+        decimal:
+          type: number
+          format: decimal
+          const: 3.141592653589
+        decimalStr:
+          type: number
+          format: decimal
+        obj:
+          $ref: "#/components/schemas/SimpleObject"
+        map:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/SimpleObject"
+        arr:
+          type: array
+          items:
+            $ref: "#/components/schemas/SimpleObject"
+        any:
+          anyOf:
+            - $ref: "#/components/schemas/SimpleObject"
+            - type: string
+        type:
+          type: string
+          default: "0"
+        some.property.with.dots:
+          type: string
+          description: "A property with dots."
+        nullableIntEnum:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+            - null
+          example: 3
+          x-speakeasy-enums:
+            - First
+            - Second
+            - Third
+            - null
+          default: 2
+        nullableStringEnum:
+          type: string
+          enum:
+            - First
+            - Second
+            - Third
+            - null
+        color:
+          $ref: "#/components/schemas/Color"
+        icon:
+          type: string
+          enum: [tick, thumbs-up, fire]
+          example: tick
+        heroWidth:
+          type: integer
+          enum: [480, 720, 1080]
+          example: 480
+          x-speakeasy-unknown-values: allow
+      required:
+        - str
+        - bool
+        - int
+        - int32
+        - num
+        - float32
+        - enumProp
+        - date
+        - dateTime
+        - anything
+        - intEnum
+        - int32Enum
+        - obj
+        - map
+        - arr
+        - any
+        - type
+        - bigint
+        - decimalStr
+        - nullableStringEnum
+        - color
+        - icon
+    SimpleObject:
+      type: object
+      properties:
+        str:
+          type: string
+          description: "A string property."
+          example: "example"
+      required:
+        - str
+    Enum:
+      type: string
+      enum:
+        - First
+        - Second
+        - Ex-aequo
+        - Ex.aequo
+      x-speakeasy-enums:
+        - First
+        - Second
+        - ThirdA
+        - ThirdB
+      example: "First"
+      default: "First"
+    File:
+      description: A file
+      format: binary
+      type: string
+    ErrorType1:
+      type: object
+      properties:
+        code:
+          type: string
+          const: rate_limit_exceeded
+          default: rate_limit_exceeded
+        error:
+          type: string
+      required:
+        - code
+        - error
+    ErrorType2:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+      required:
+        - error
+    TaggedError1:
+      type: object
+      properties:
+        tag:
+          type: string
+          enum: [tag1]
+        error:
+          type: string
+      required:
+        - tag
+        - error
+    TaggedError2:
+      type: object
+      properties:
+        tag:
+          type: string
+          const: tag2
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+      required:
+        - tag
+        - error
+    CircularUnion:
+      oneOf:
+        - type: object
+          additionalProperties:
+            $ref: "#/components/schemas/CircularUnion"
+        - type: string
+        - type: integer
+        - type: boolean
+        - type: array
+          items:
+            $ref: "#/components/schemas/CircularUnion"
+        - type: number
+    BaseUser:
+      type: object
+      required: [email]
+      properties:
+        id:
+          type: string
+          example: "8ffac18c-7d88-4879-b057-e5f45b9ce7de"
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        age:
+          type: number
+        postal_code:
+          type: string
+        associatedIds:
+          type: array
+          items:
+            type: string
+        metadata:
+          $ref: "#/components/schemas/Metadata"
+    User:
+      allOf:
+        - $ref: "#/components/schemas/BaseUser"
+        - required: ["id"]
+    Metadata:
+      type: object
+      properties:
+        allergies:
+          type: string
+      additionalProperties:
+        type: string
+    Color:
+      type: string
+      enum: [red, green, blue]
+      example: green
+      default: blue
+      x-speakeasy-unknown-values: allow
+      x-speakeasy-enum-format: union
+    DisriminatedUnionWithOneMember:
+      x-speakeasy-include: true
+      oneOf:
+        - $ref: "#/components/schemas/ExhaustiveObject"
+      discriminator:
+        propertyName: type
+        mapping:
+          type1: "#/components/schemas/ExhaustiveObject"
+  requestBodies:
+    Test2Request:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              obj:
+                $ref: "#/components/schemas/ExhaustiveObject"
+              type:
+                type: string
+                enum:
+                  - type1
+                  - type2
+                x-speakeasy-enums:
+                  - SuperType1
+                  - SuperType2
+                example: "type1"
+            required:
+              - obj
+      required: true
+  responses:
+    BadRequestResponse:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status_code:
+                type: number
+                description: HTTP status code
+                example: 400
+              error:
+                type: string
+                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+                example: Bad Request
+              type_name:
+                type: string
+                description: The type of error returned
+                example: RequestValidationError
+              message:
+                type: string
+                description: A human-readable message providing more details about the error.
+                example: Invalid Params
+              detail:
+                anyOf:
+                  - type: string
+                    example: Missing property foobar
+                  - type: object
+                    example:
+                      missing:
+                        - foobar: required
+                description: Contains parameter or domain specific information related to the error and why it occurred.
+              ref:
+                type: string
+                description: Link to documentation of error type
+  parameters:
+    loneQueryParam:
+      name: loneQueryParam
+      x-speakeasy-globals-hidden: true
+      in: query
+      required: false
+      schema:
+        type: string
