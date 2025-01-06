@@ -253,9 +253,9 @@ func New(opts ...SDKOption) *SDK {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "0.1.0",
-			SDKVersion:        "0.2.1",
+			SDKVersion:        "0.2.2",
 			GenVersion:        "2.486.1",
-			UserAgent:         "speakeasy-sdk/go 0.2.1 2.486.1 0.1.0 github.com/tristanspeakeasy/sdk-platform-test",
+			UserAgent:         "speakeasy-sdk/go 0.2.2 2.486.1 0.1.0 github.com/tristanspeakeasy/sdk-platform-test",
 			Globals:           globals.Globals{},
 			ServerDefaults: []map[string]string{
 				{},

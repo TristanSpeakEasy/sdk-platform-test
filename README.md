@@ -52,7 +52,7 @@ For more information about the API: [Speakeasy Docs](https://speakeasy.com/docs)
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/tristanspeakeasy/sdk-platform-test
+go get github.com/TristanSpeakEasy/sdk-platform-test
 ```
 <!-- End SDK Installation [installation] -->
 
