@@ -5,8 +5,10 @@ management:
   docVersion: 0.1.0
   speakeasyVersion: 1.462.2
   generationVersion: 2.486.1
-  releaseVersion: 0.2.1
-  configChecksum: 2c725515176ea502fecc990478935b5d
+  releaseVersion: 0.2.2
+  configChecksum: f1facbf1f70cbeeea3cea38829ad8f36
+  repoURL: https://github.com/TristanSpeakEasy/sdk-platform-test.git
+  installationURL: https://github.com/TristanSpeakEasy/sdk-platform-test
 features:
   go:
     additionalDependencies: 0.1.0
