@@ -9,3 +9,13 @@ Based on:
 - [go v0.2.2] .
 ### Releases
 - [Go v0.2.2] https://github.com/TristanSpeakEasy/sdk-platform-test/releases/tag/v0.2.2 - .
+
+## 2025-01-16 00:03:12
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.462.2 (2.486.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.2.4] .
+### Releases
+- [Go v0.2.4] https://github.com/TristanSpeakEasy/sdk-platform-test/releases/tag/v0.2.4 - .
