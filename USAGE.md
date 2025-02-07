@@ -76,6 +76,7 @@ func main() {
 			IntEnum:    components.IntEnumThird.ToPointer(),
 			Int32Enum:  components.Int32EnumSixtyNine,
 			Bigint:     big.NewInt(119171),
+			BigintStr:  types.MustNewBigIntFromString("12345678901234567890"),
 			DecimalStr: types.MustNewDecimalFromString("4560.33"),
 			Obj: components.SimpleObject{
 				Str: "example",
@@ -105,6 +106,7 @@ func main() {
 			Any: components.CreateAnyStr(
 				"<value>",
 			),
+			Type:               sdkplatformtest.String("0"),
 			NullableIntEnum:    components.NullableIntEnumThird.ToPointer(),
 			NullableStringEnum: components.NullableStringEnumThird,
 			Color:              components.ColorGreen.ToPointer(),
