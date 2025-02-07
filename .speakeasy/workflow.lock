@@ -2,17 +2,17 @@ speakeasyVersion: 1.462.2
 sources:
     SDK Review:
         sourceNamespace: sdk-review
-        sourceRevisionDigest: sha256:faf7d609930ba90b28d97d4707b766dab869706eebff9307b1bec568f2e411ef
+        sourceRevisionDigest: sha256:892ad6c17da6146a7699deccc76f3de2190bd8156f5b658f1d43954d8e553146
         sourceBlobDigest: sha256:a03e01d956eb0ea9203df67b431cf5f6de28a58e4086768424f20d902a924d89
         tags:
             - latest
-            - speakeasy-sdk-regen-1736125116
+            - speakeasy-sdk-regen-1736126833
             - 0.1.0
 targets:
     sdk-platform-test:
         source: SDK Review
         sourceNamespace: sdk-review
-        sourceRevisionDigest: sha256:faf7d609930ba90b28d97d4707b766dab869706eebff9307b1bec568f2e411ef
+        sourceRevisionDigest: sha256:892ad6c17da6146a7699deccc76f3de2190bd8156f5b658f1d43954d8e553146
         sourceBlobDigest: sha256:a03e01d956eb0ea9203df67b431cf5f6de28a58e4086768424f20d902a924d89
 workflow:
     workflowVersion: 1.0.0

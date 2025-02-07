@@ -5,8 +5,8 @@ management:
   docVersion: 0.1.0
   speakeasyVersion: 1.462.2
   generationVersion: 2.486.1
-  releaseVersion: 0.2.2
-  configChecksum: f1facbf1f70cbeeea3cea38829ad8f36
+  releaseVersion: 0.3.1
+  configChecksum: 3e754f520c1f7cef348f1f64135bcd61
   repoURL: https://github.com/TristanSpeakEasy/sdk-platform-test.git
   installationURL: https://github.com/TristanSpeakEasy/sdk-platform-test
 features:
@@ -100,7 +100,6 @@ generatedFiles:
   - /models/operations/updateuser.go
   - /models/webhooks/paymentcreated.go
   - /models/webhooks/paymentupdated.go
-  - CONTRIBUTING.md
   - USAGE.md
   - docs/models/apierrors/badrequestresponse.md
   - docs/models/apierrors/detail.md
@@ -346,14 +345,17 @@ examples:
       requestBody:
         multipart/form-data: {"file": {}}
       responses:
+        "200":
+          application/octet-stream: "x-file: example.file"
         "415":
           application/json: {"error": "some example error", "code": 2}
-        "200": {}
+        5XX:
+          application/json: {"error": "some example error", "code": 2}
   getPolymorphism:
     speakeasy-default-get-polymorphism:
       responses:
         "200":
-          application/json: {"oneOfWithUnionDescription": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "7754.37", "enumProp": "First", "date": "2023-04-06", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 815677, "decimalStr": "7753.11", "obj": {"str": "example"}, "map": {}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "First", "color": "green", "icon": "tick", "heroWidth": 480}, "oneOfWithFactoredOutProperties": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "4039.85", "enumProp": "First", "date": "2023-08-21", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 367921, "decimalStr": "3125.86", "obj": {"str": "example"}, "map": {"key": {"str": "example"}}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "Third", "color": "green", "icon": "tick", "heroWidth": 480, "anExtraProperty": "example"}, "simpleAllOf": {"str": "example", "bool": true}, "allOfWithFactoredOutProperties": {"anOverridingProperty": "example", "anotherProperty": "example", "anExtraProperty": "example"}}
+          application/json: {"oneOfWithUnionDescription": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": 7754.37, "enumProp": "First", "date": "2023-04-06", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 815677, "bigintStr": "12345678901234567890", "decimalStr": 7753.12, "obj": {"str": "example"}, "map": {}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "type": "0", "nullableIntEnum": 3, "nullableStringEnum": "First", "color": "green", "icon": "tick", "heroWidth": 480}, "oneOfWithFactoredOutProperties": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "7754.37", "enumProp": "First", "date": "2023-04-06", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 815677, "decimalStr": "7753.11", "obj": {"str": "example"}, "map": {}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "First", "color": "green", "icon": "tick", "heroWidth": 480, "anExtraProperty": "example"}, "simpleAllOf": {"str": "example", "bool": true}, "allOfWithFactoredOutProperties": {"anOverridingProperty": "example", "anotherProperty": "example", "anExtraProperty": "example"}}
   getUnionErrors:
     "":
       parameters:
@@ -417,7 +419,11 @@ examples:
     speakeasy-default-chat:
       requestBody:
         application/json: {"prompt": "What is the largest city in the world?"}
-  getBinaryDefaultResponse: {}
+  getBinaryDefaultResponse:
+    speakeasy-default-get-binary-default-response:
+      responses:
+        default:
+          application/octet-stream: "x-file: example.file"
   deprecated1: {}
   listTest1:
     speakeasy-default-list-test1:
@@ -443,7 +449,7 @@ examples:
           deprecatedQueryParam1: "some example query param"
           deprecatedQueryParam2: "some example query param"
       requestBody:
-        application/json: {"obj": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": "4344.96", "enumProp": "First", "date": "2024-02-10", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 119171, "decimalStr": "4560.33", "obj": {"str": "example"}, "map": {"key": {"str": "example"}, "key1": {"str": "example"}, "key2": {"str": "example"}}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "nullableIntEnum": 3, "nullableStringEnum": "Third", "color": "green", "icon": "tick", "heroWidth": 480}, "type": "type1"}
+        application/json: {"obj": {"str": "example", "bool": true, "int": 999999, "int32": 1, "num": 1.1, "float32": 4344.96, "enumProp": "First", "date": "2024-02-10", "dateTime": "2020-01-01T00:00:00Z", "anything": "<value>", "boolOpt": true, "intOptNull": 999999, "numOptNull": 1.1, "intEnum": 3, "int32Enum": 69, "bigint": 119171, "bigintStr": "12345678901234567890", "decimalStr": 4560.33, "obj": {"str": "example"}, "map": {"key": {"str": "example"}, "key1": {"str": "example"}, "key2": {"str": "example"}}, "arr": [{"str": "example"}, {"str": "example"}, {"str": "example"}], "any": "<value>", "type": "0", "nullableIntEnum": 3, "nullableStringEnum": "Third", "color": "green", "icon": "tick", "heroWidth": 480}, "type": "type1"}
       responses:
         "200":
           multipart/form-data: "0xFf47C5ff08"
@@ -477,3 +483,4 @@ generatedTests:
   createUser: "2025-01-06T10:41:49+10:00"
   updateUser: "2025-01-06T10:41:49+10:00"
   deleteUser: "2025-01-06T10:41:49+10:00"
+examplesVersion: 1.0.0
