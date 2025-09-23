@@ -14,16 +14,16 @@ type GetBinaryDefaultResponseResponse struct {
 	Bytes io.ReadCloser
 }
 
-func (o *GetBinaryDefaultResponseResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetBinaryDefaultResponseResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetBinaryDefaultResponseResponse) GetBytes() io.ReadCloser {
-	if o == nil {
+func (g *GetBinaryDefaultResponseResponse) GetBytes() io.ReadCloser {
+	if g == nil {
 		return nil
 	}
-	return o.Bytes
+	return g.Bytes
 }

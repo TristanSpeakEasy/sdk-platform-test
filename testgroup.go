@@ -2,17 +2,26 @@
 
 package sdkplatformtest
 
+import (
+	"github.com/tristanspeakeasy/sdk-platform-test/internal/config"
+	"github.com/tristanspeakeasy/sdk-platform-test/internal/hooks"
+)
+
 type TestGroup struct {
 	Tag2 *Tag2
 	Tag3 *Tag3
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *SDK
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newTestGroup(sdkConfig sdkConfiguration) *TestGroup {
+func newTestGroup(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *TestGroup {
 	return &TestGroup{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		Tag2:             newTag2(sdkConfig),
-		Tag3:             newTag3(sdkConfig),
+		hooks:            hooks,
+		Tag2:             newTag2(rootSDK, sdkConfig, hooks),
+		Tag3:             newTag3(rootSDK, sdkConfig, hooks),
 	}
 }

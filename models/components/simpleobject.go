@@ -2,14 +2,29 @@
 
 package components
 
+import (
+	"github.com/tristanspeakeasy/sdk-platform-test/internal/utils"
+)
+
 type SimpleObject struct {
 	// A string property.
 	Str string `json:"str"`
 }
 
-func (o *SimpleObject) GetStr() string {
-	if o == nil {
+func (s SimpleObject) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SimpleObject) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"str"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SimpleObject) GetStr() string {
+	if s == nil {
 		return ""
 	}
-	return o.Str
+	return s.Str
 }

@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/tristanspeakeasy/sdk-platform-test/internal/config"
 	"github.com/tristanspeakeasy/sdk-platform-test/internal/hooks"
 	"github.com/tristanspeakeasy/sdk-platform-test/internal/utils"
 	"github.com/tristanspeakeasy/sdk-platform-test/models/apierrors"
@@ -17,12 +18,16 @@ import (
 )
 
 type Tag3 struct {
-	sdkConfiguration sdkConfiguration
+	rootSDK          *SDK
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newTag3(sdkConfig sdkConfiguration) *Tag3 {
+func newTag3(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Tag3 {
 	return &Tag3{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
+		hooks:            hooks,
 	}
 }
 
@@ -30,13 +35,6 @@ func newTag3(sdkConfig sdkConfiguration) *Tag3 {
 // This is a test endpoint.
 // It has a description.
 func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Request, deprecatedQueryParam1 *string, deprecatedQueryParam2 *string, opts ...operations.Option) (*operations.PostTest2Response, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "postTest2",
-		OAuth2Scopes:   []string{},
-		SecuritySource: nil,
-	}
-
 	request := operations.PostTest2Request{
 		DeprecatedQueryParam1: deprecatedQueryParam1,
 		DeprecatedQueryParam2: deprecatedQueryParam2,
@@ -73,6 +71,15 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "postTest2",
+		OAuth2Scopes:     []string{},
+		SecuritySource:   nil,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Test2Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -95,7 +102,9 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 	}
 	req.Header.Set("Accept", "multipart/form-data")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-	req.Header.Set("Content-Type", reqContentType)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
@@ -131,15 +140,17 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 				"404",
 			},
 		}, func() (*http.Response, error) {
-			if req.Body != nil {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
 				copyBody, err := req.GetBody()
+
 				if err != nil {
 					return nil, err
 				}
+
 				req.Body = copyBody
 			}
 
-			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 			if err != nil {
 				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
 					return nil, err
@@ -156,7 +167,7 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 					err = fmt.Errorf("error sending request: no response")
 				}
 
-				_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			}
 			return httpRes, err
 		})
@@ -164,13 +175,13 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 		if err != nil {
 			return nil, err
 		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 			if err != nil {
 				return nil, err
 			}
 		}
 	} else {
-		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 		if err != nil {
 			return nil, err
 		}
@@ -183,17 +194,17 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
 		} else if utils.MatchStatusCodes([]string{"400", "404", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
 			} else if _httpRes != nil {
 				httpRes = _httpRes
 			}
 		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 			if err != nil {
 				return nil, err
 			}
@@ -288,7 +299,11 @@ func (s *Tag3) PostTest(ctx context.Context, test2Request components.Test2Reques
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
-		fallthrough
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {

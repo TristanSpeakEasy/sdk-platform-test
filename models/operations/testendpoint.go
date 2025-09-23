@@ -10,11 +10,11 @@ type TestEndpointRequestBody struct {
 	Test string `json:"test"`
 }
 
-func (o *TestEndpointRequestBody) GetTest() string {
-	if o == nil {
+func (t *TestEndpointRequestBody) GetTest() string {
+	if t == nil {
 		return ""
 	}
-	return o.Test
+	return t.Test
 }
 
 type TestEndpointRequest struct {
@@ -22,27 +22,27 @@ type TestEndpointRequest struct {
 	RequestBody TestEndpointRequestBody `request:"mediaType=application/json"`
 }
 
-func (o *TestEndpointRequest) GetTestName() string {
-	if o == nil {
+func (t *TestEndpointRequest) GetTestName() string {
+	if t == nil {
 		return ""
 	}
-	return o.TestName
+	return t.TestName
 }
 
-func (o *TestEndpointRequest) GetRequestBody() TestEndpointRequestBody {
-	if o == nil {
+func (t *TestEndpointRequest) GetRequestBody() TestEndpointRequestBody {
+	if t == nil {
 		return TestEndpointRequestBody{}
 	}
-	return o.RequestBody
+	return t.RequestBody
 }
 
 type TestEndpointResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-func (o *TestEndpointResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TestEndpointResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }

@@ -16,22 +16,22 @@ func (m Metadata) MarshalJSON() ([]byte, error) {
 }
 
 func (m *Metadata) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Metadata) GetAllergies() *string {
-	if o == nil {
+func (m *Metadata) GetAllergies() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Allergies
+	return m.Allergies
 }
 
-func (o *Metadata) GetAdditionalProperties() map[string]string {
-	if o == nil {
+func (m *Metadata) GetAdditionalProperties() map[string]string {
+	if m == nil {
 		return nil
 	}
-	return o.AdditionalProperties
+	return m.AdditionalProperties
 }

@@ -9,37 +9,37 @@ type Globals struct {
 	QueryParam1 *string `queryParam:"style=form,explode=true,name=queryParam1"`
 	// A deprecated description
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DeprecatedQueryParam1 *string `queryParam:"style=form,explode=true,name=deprecatedQueryParam1"`
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	DeprecatedQueryParam2 *string `queryParam:"style=form,explode=true,name=deprecatedQueryParam2"`
 	LoneQueryParam        *string `queryParam:"style=form,explode=true,name=loneQueryParam"`
 }
 
-func (o *Globals) GetQueryParam1() *string {
-	if o == nil {
+func (g *Globals) GetQueryParam1() *string {
+	if g == nil {
 		return nil
 	}
-	return o.QueryParam1
+	return g.QueryParam1
 }
 
-func (o *Globals) GetDeprecatedQueryParam1() *string {
-	if o == nil {
+func (g *Globals) GetDeprecatedQueryParam1() *string {
+	if g == nil {
 		return nil
 	}
-	return o.DeprecatedQueryParam1
+	return g.DeprecatedQueryParam1
 }
 
-func (o *Globals) GetDeprecatedQueryParam2() *string {
-	if o == nil {
+func (g *Globals) GetDeprecatedQueryParam2() *string {
+	if g == nil {
 		return nil
 	}
-	return o.DeprecatedQueryParam2
+	return g.DeprecatedQueryParam2
 }
 
-func (o *Globals) GetLoneQueryParam() *string {
-	if o == nil {
+func (g *Globals) GetLoneQueryParam() *string {
+	if g == nil {
 		return nil
 	}
-	return o.LoneQueryParam
+	return g.LoneQueryParam
 }

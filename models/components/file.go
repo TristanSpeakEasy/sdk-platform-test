@@ -8,16 +8,16 @@ type File struct {
 	Content any `multipartForm:"content"`
 }
 
-func (o *File) GetFileName() string {
-	if o == nil {
+func (f *File) GetFileName() string {
+	if f == nil {
 		return ""
 	}
-	return o.FileName
+	return f.FileName
 }
 
-func (o *File) GetContent() any {
-	if o == nil {
+func (f *File) GetContent() any {
+	if f == nil {
 		return nil
 	}
-	return o.Content
+	return f.Content
 }

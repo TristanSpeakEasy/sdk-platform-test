@@ -17,19 +17,19 @@ func (e ErrorType1) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ErrorType1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"error"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ErrorType1) GetCode() *string {
-	return types.String("rate_limit_exceeded")
+func (e *ErrorType1) GetCode() *string {
+	return types.Pointer("rate_limit_exceeded")
 }
 
-func (o *ErrorType1) GetError() string {
-	if o == nil {
+func (e *ErrorType1) GetError() string {
+	if e == nil {
 		return ""
 	}
-	return o.Error
+	return e.Error
 }

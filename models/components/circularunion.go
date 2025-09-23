@@ -20,12 +20,12 @@ const (
 )
 
 type CircularUnion struct {
-	MapOfCircularUnion   map[string]CircularUnion `queryParam:"inline"`
-	Str                  *string                  `queryParam:"inline"`
-	Integer              *int64                   `queryParam:"inline"`
-	Boolean              *bool                    `queryParam:"inline"`
-	ArrayOfCircularUnion []CircularUnion          `queryParam:"inline"`
-	Number               *float64                 `queryParam:"inline"`
+	MapOfCircularUnion   map[string]CircularUnion `queryParam:"inline" name:"CircularUnion"`
+	Str                  *string                  `queryParam:"inline" name:"CircularUnion"`
+	Integer              *int64                   `queryParam:"inline" name:"CircularUnion"`
+	Boolean              *bool                    `queryParam:"inline" name:"CircularUnion"`
+	ArrayOfCircularUnion []CircularUnion          `queryParam:"inline" name:"CircularUnion"`
+	Number               *float64                 `queryParam:"inline" name:"CircularUnion"`
 
 	Type CircularUnionType
 }
@@ -87,42 +87,42 @@ func CreateCircularUnionNumber(number float64) CircularUnion {
 func (u *CircularUnion) UnmarshalJSON(data []byte) error {
 
 	var mapOfCircularUnion map[string]CircularUnion = map[string]CircularUnion{}
-	if err := utils.UnmarshalJSON(data, &mapOfCircularUnion, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfCircularUnion, "", true, nil); err == nil {
 		u.MapOfCircularUnion = mapOfCircularUnion
 		u.Type = CircularUnionTypeMapOfCircularUnion
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = CircularUnionTypeStr
 		return nil
 	}
 
 	var integer int64 = int64(0)
-	if err := utils.UnmarshalJSON(data, &integer, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &integer, "", true, nil); err == nil {
 		u.Integer = &integer
 		u.Type = CircularUnionTypeInteger
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = CircularUnionTypeBoolean
 		return nil
 	}
 
 	var arrayOfCircularUnion []CircularUnion = []CircularUnion{}
-	if err := utils.UnmarshalJSON(data, &arrayOfCircularUnion, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfCircularUnion, "", true, nil); err == nil {
 		u.ArrayOfCircularUnion = arrayOfCircularUnion
 		u.Type = CircularUnionTypeArrayOfCircularUnion
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = CircularUnionTypeNumber
 		return nil

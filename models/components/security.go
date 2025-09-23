@@ -7,18 +7,18 @@ type SecurityOption1 struct {
 	Password string `security:"scheme,type=http,subtype=basic,name=password,env=sdk_password"`
 }
 
-func (o *SecurityOption1) GetUsername() string {
-	if o == nil {
+func (s *SecurityOption1) GetUsername() string {
+	if s == nil {
 		return ""
 	}
-	return o.Username
+	return s.Username
 }
 
-func (o *SecurityOption1) GetPassword() string {
-	if o == nil {
+func (s *SecurityOption1) GetPassword() string {
+	if s == nil {
 		return ""
 	}
-	return o.Password
+	return s.Password
 }
 
 type SecurityOption2 struct {
@@ -26,29 +26,29 @@ type SecurityOption2 struct {
 	APIKey     string `security:"scheme,type=apiKey,subtype=header,name=api_key,env=sdk_api_key"`
 }
 
-func (o *SecurityOption2) GetBearerAuth() string {
-	if o == nil {
+func (s *SecurityOption2) GetBearerAuth() string {
+	if s == nil {
 		return ""
 	}
-	return o.BearerAuth
+	return s.BearerAuth
 }
 
-func (o *SecurityOption2) GetAPIKey() string {
-	if o == nil {
+func (s *SecurityOption2) GetAPIKey() string {
+	if s == nil {
 		return ""
 	}
-	return o.APIKey
+	return s.APIKey
 }
 
 type SecurityOption3 struct {
 	Oauth2 string `security:"scheme,type=oauth2,name=Authorization,env=sdk_oauth2"`
 }
 
-func (o *SecurityOption3) GetOauth2() string {
-	if o == nil {
+func (s *SecurityOption3) GetOauth2() string {
+	if s == nil {
 		return ""
 	}
-	return o.Oauth2
+	return s.Oauth2
 }
 
 type SecurityOption4 struct {
@@ -56,29 +56,29 @@ type SecurityOption4 struct {
 	Secret string `json:"secret" security:"scheme,type=http,subtype=custom,name=secret,env=sdk_secret"`
 }
 
-func (o *SecurityOption4) GetAppID() string {
-	if o == nil {
+func (s *SecurityOption4) GetAppID() string {
+	if s == nil {
 		return ""
 	}
-	return o.AppID
+	return s.AppID
 }
 
-func (o *SecurityOption4) GetSecret() string {
-	if o == nil {
+func (s *SecurityOption4) GetSecret() string {
+	if s == nil {
 		return ""
 	}
-	return o.Secret
+	return s.Secret
 }
 
 type SecurityOption5 struct {
 	MobileAuth string `security:"scheme,type=oauth2,name=Authorization,env=sdk_mobile_auth"`
 }
 
-func (o *SecurityOption5) GetMobileAuth() string {
-	if o == nil {
+func (s *SecurityOption5) GetMobileAuth() string {
+	if s == nil {
 		return ""
 	}
-	return o.MobileAuth
+	return s.MobileAuth
 }
 
 type Security struct {
@@ -89,37 +89,37 @@ type Security struct {
 	Option5 *SecurityOption5 `security:"option"`
 }
 
-func (o *Security) GetOption1() *SecurityOption1 {
-	if o == nil {
+func (s *Security) GetOption1() *SecurityOption1 {
+	if s == nil {
 		return nil
 	}
-	return o.Option1
+	return s.Option1
 }
 
-func (o *Security) GetOption2() *SecurityOption2 {
-	if o == nil {
+func (s *Security) GetOption2() *SecurityOption2 {
+	if s == nil {
 		return nil
 	}
-	return o.Option2
+	return s.Option2
 }
 
-func (o *Security) GetOption3() *SecurityOption3 {
-	if o == nil {
+func (s *Security) GetOption3() *SecurityOption3 {
+	if s == nil {
 		return nil
 	}
-	return o.Option3
+	return s.Option3
 }
 
-func (o *Security) GetOption4() *SecurityOption4 {
-	if o == nil {
+func (s *Security) GetOption4() *SecurityOption4 {
+	if s == nil {
 		return nil
 	}
-	return o.Option4
+	return s.Option4
 }
 
-func (o *Security) GetOption5() *SecurityOption5 {
-	if o == nil {
+func (s *Security) GetOption5() *SecurityOption5 {
+	if s == nil {
 		return nil
 	}
-	return o.Option5
+	return s.Option5
 }

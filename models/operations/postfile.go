@@ -12,11 +12,11 @@ type PostFileRequestBody struct {
 	File components.File `multipartForm:"file,name=file"`
 }
 
-func (o *PostFileRequestBody) GetFile() components.File {
-	if o == nil {
+func (p *PostFileRequestBody) GetFile() components.File {
+	if p == nil {
 		return components.File{}
 	}
-	return o.File
+	return p.File
 }
 
 type PostFileResponse struct {
@@ -26,16 +26,16 @@ type PostFileResponse struct {
 	File io.ReadCloser
 }
 
-func (o *PostFileResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (p *PostFileResponse) GetHTTPMeta() components.HTTPMetadata {
+	if p == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return p.HTTPMeta
 }
 
-func (o *PostFileResponse) GetFile() io.ReadCloser {
-	if o == nil {
+func (p *PostFileResponse) GetFile() io.ReadCloser {
+	if p == nil {
 		return nil
 	}
-	return o.File
+	return p.File
 }

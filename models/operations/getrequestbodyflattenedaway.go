@@ -10,11 +10,11 @@ type GetRequestBodyFlattenedAwayGlobals struct {
 	LoneQueryParam *string `queryParam:"style=form,explode=true,name=loneQueryParam"`
 }
 
-func (o *GetRequestBodyFlattenedAwayGlobals) GetLoneQueryParam() *string {
-	if o == nil {
+func (g *GetRequestBodyFlattenedAwayGlobals) GetLoneQueryParam() *string {
+	if g == nil {
 		return nil
 	}
-	return o.LoneQueryParam
+	return g.LoneQueryParam
 }
 
 type GetRequestBodyFlattenedAwayRequest struct {
@@ -24,9 +24,9 @@ type GetRequestBodyFlattenedAwayResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-func (o *GetRequestBodyFlattenedAwayResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetRequestBodyFlattenedAwayResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }

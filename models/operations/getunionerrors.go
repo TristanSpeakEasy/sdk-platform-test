@@ -10,11 +10,11 @@ type GetUnionErrorsRequest struct {
 	Page int64 `queryParam:"style=form,explode=true,name=page"`
 }
 
-func (o *GetUnionErrorsRequest) GetPage() int64 {
-	if o == nil {
+func (g *GetUnionErrorsRequest) GetPage() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.Page
+	return g.Page
 }
 
 // GetUnionErrorsResponseBody - OK
@@ -22,11 +22,11 @@ type GetUnionErrorsResponseBody struct {
 	Pages []string `json:"pages"`
 }
 
-func (o *GetUnionErrorsResponseBody) GetPages() []string {
-	if o == nil {
+func (g *GetUnionErrorsResponseBody) GetPages() []string {
+	if g == nil {
 		return []string{}
 	}
-	return o.Pages
+	return g.Pages
 }
 
 type GetUnionErrorsResponse struct {
@@ -37,16 +37,16 @@ type GetUnionErrorsResponse struct {
 	Next func() (*GetUnionErrorsResponse, error)
 }
 
-func (o *GetUnionErrorsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetUnionErrorsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetUnionErrorsResponse) GetObject() *GetUnionErrorsResponseBody {
-	if o == nil {
+func (g *GetUnionErrorsResponse) GetObject() *GetUnionErrorsResponseBody {
+	if g == nil {
 		return nil
 	}
-	return o.Object
+	return g.Object
 }

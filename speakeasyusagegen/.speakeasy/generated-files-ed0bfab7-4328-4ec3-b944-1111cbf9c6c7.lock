@@ -1,0 +1,15 @@
+postFile.usage.go
+listTest1.usage.go
+postTest2.usage.go
+_operation_with_leading_and_trailing_underscores_.usage.go
+getPolymorphism.usage.go
+getUnionErrors.usage.go
+getRequestBodyFlattenedAway.usage.go
+getFullyFlattenedRequest.usage.go
+testEndpoint.usage.go
+createUser.usage.go
+getUser.usage.go
+updateUser.usage.go
+deleteUser.usage.go
+chat.usage.go
+getBinaryDefaultResponse.usage.go

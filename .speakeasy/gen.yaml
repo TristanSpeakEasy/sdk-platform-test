@@ -7,20 +7,30 @@ generation:
   maintainOpenAPIOrder: true
   usageSnippets:
     optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
+    sharedErrorComponentsApr2025: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
   mockServer:
     disabled: false
+  tests:
+    generateTests: true
+    generateNewTests: false
+    skipResponseBodyAssertions: false
 go:
-  version: 0.2.2
+  version: 0.3.0
   additionalDependencies: {}
   allowUnknownFieldsInWeakUnions: false
+  baseErrorName: SDKError
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
   envVarPrefix: SDK
@@ -36,6 +46,10 @@ go:
   inputModelSuffix: input
   maxMethodParams: 4
   methodArguments: require-security-and-request
+  modulePath: ""
+  nullableOptionalWrapper: false
   outputModelSuffix: output
   packageName: github.com/tristanspeakeasy/sdk-platform-test
+  respectRequiredFields: false
   responseFormat: envelope-http
+  sdkPackageName: ""

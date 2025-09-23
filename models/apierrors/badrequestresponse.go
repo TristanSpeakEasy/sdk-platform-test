@@ -12,6 +12,17 @@ import (
 type Two struct {
 }
 
+func (t Two) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Two) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type DetailType string
 
 const (
@@ -21,8 +32,8 @@ const (
 
 // Detail - Contains parameter or domain specific information related to the error and why it occurred.
 type Detail struct {
-	Str *string `queryParam:"inline"`
-	Two *Two    `queryParam:"inline"`
+	Str *string `queryParam:"inline" name:"detail"`
+	Two *Two    `queryParam:"inline" name:"detail"`
 
 	Type DetailType
 }
@@ -50,14 +61,14 @@ func CreateDetailTwo(two Two) Detail {
 func (u *Detail) UnmarshalJSON(data []byte) error {
 
 	var two Two = Two{}
-	if err := utils.UnmarshalJSON(data, &two, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &two, "", true, nil); err == nil {
 		u.Two = &two
 		u.Type = DetailTypeTwo
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = DetailTypeStr
 		return nil

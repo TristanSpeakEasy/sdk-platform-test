@@ -2,24 +2,50 @@
 
 package components
 
+import (
+	"github.com/tristanspeakeasy/sdk-platform-test/internal/utils"
+)
+
 type ErrorType2Error struct {
 	Message string `json:"message"`
 }
 
-func (o *ErrorType2Error) GetMessage() string {
-	if o == nil {
+func (e ErrorType2Error) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *ErrorType2Error) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"message"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *ErrorType2Error) GetMessage() string {
+	if e == nil {
 		return ""
 	}
-	return o.Message
+	return e.Message
 }
 
 type ErrorType2 struct {
 	Error ErrorType2Error `json:"error"`
 }
 
-func (o *ErrorType2) GetError() ErrorType2Error {
-	if o == nil {
+func (e ErrorType2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *ErrorType2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"error"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *ErrorType2) GetError() ErrorType2Error {
+	if e == nil {
 		return ErrorType2Error{}
 	}
-	return o.Error
+	return e.Error
 }

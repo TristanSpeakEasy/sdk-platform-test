@@ -10,20 +10,20 @@ type DeleteUserRequest struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-func (o *DeleteUserRequest) GetID() string {
-	if o == nil {
+func (d *DeleteUserRequest) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ID
+	return d.ID
 }
 
 type DeleteUserResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-func (o *DeleteUserResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (d *DeleteUserResponse) GetHTTPMeta() components.HTTPMetadata {
+	if d == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return d.HTTPMeta
 }

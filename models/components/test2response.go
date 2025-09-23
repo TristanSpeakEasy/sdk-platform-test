@@ -17,19 +17,19 @@ func (t Test2Response) MarshalJSON() ([]byte, error) {
 }
 
 func (t *Test2Response) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *Test2Response) GetTest2() *string {
-	if o == nil {
+func (t *Test2Response) GetTest2() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Test2
+	return t.Test2
 }
 
-func (o *Test2Response) GetSomeConst() *string {
-	return types.String("someConstValue")
+func (t *Test2Response) GetSomeConst() *string {
+	return types.Pointer("someConstValue")
 }

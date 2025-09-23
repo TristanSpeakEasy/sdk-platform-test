@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/tristanspeakeasy/sdk-platform-test/internal/utils"
 )
 
 type Tag string
@@ -35,16 +36,27 @@ type TaggedError1 struct {
 	Error string `json:"error"`
 }
 
-func (o *TaggedError1) GetTag() Tag {
-	if o == nil {
-		return Tag("")
-	}
-	return o.Tag
+func (t TaggedError1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TaggedError1) GetError() string {
-	if o == nil {
+func (t *TaggedError1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"tag", "error"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *TaggedError1) GetTag() Tag {
+	if t == nil {
+		return Tag("")
+	}
+	return t.Tag
+}
+
+func (t *TaggedError1) GetError() string {
+	if t == nil {
 		return ""
 	}
-	return o.Error
+	return t.Error
 }

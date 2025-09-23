@@ -11,22 +11,22 @@ type ChatRequestBody struct {
 	Prompt *string `json:"prompt,omitempty"`
 }
 
-func (o *ChatRequestBody) GetPrompt() *string {
-	if o == nil {
+func (c *ChatRequestBody) GetPrompt() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Prompt
+	return c.Prompt
 }
 
 type Data struct {
 	Content *string `json:"content,omitempty"`
 }
 
-func (o *Data) GetContent() *string {
-	if o == nil {
+func (d *Data) GetContent() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Content
+	return d.Content
 }
 
 // ChatChatStream - A stream containing chat completion tokens
@@ -34,14 +34,14 @@ type ChatChatStream struct {
 	Data Data `json:"data"`
 }
 
-func (o *ChatChatStream) GetData() Data {
-	if o == nil {
+func (c *ChatChatStream) GetData() Data {
+	if c == nil {
 		return Data{}
 	}
-	return o.Data
+	return c.Data
 }
 
-func (o ChatChatStream) GetEventEncoding(event string) (string, error) {
+func (c ChatChatStream) GetEventEncoding(event string) (string, error) {
 	return "application/json", nil
 }
 
@@ -51,16 +51,16 @@ type ChatResponse struct {
 	ChatStream *stream.EventStream[ChatChatStream]
 }
 
-func (o *ChatResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (c *ChatResponse) GetHTTPMeta() components.HTTPMetadata {
+	if c == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return c.HTTPMeta
 }
 
-func (o *ChatResponse) GetChatStream() *stream.EventStream[ChatChatStream] {
-	if o == nil {
+func (c *ChatResponse) GetChatStream() *stream.EventStream[ChatChatStream] {
+	if c == nil {
 		return nil
 	}
-	return o.ChatStream
+	return c.ChatStream
 }

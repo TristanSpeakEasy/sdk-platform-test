@@ -10,11 +10,22 @@ type Error struct {
 	Message string `json:"message"`
 }
 
-func (o *Error) GetMessage() string {
-	if o == nil {
+func (e Error) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *Error) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"message"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *Error) GetMessage() string {
+	if e == nil {
 		return ""
 	}
-	return o.Message
+	return e.Message
 }
 
 type TaggedError2 struct {
@@ -27,19 +38,19 @@ func (t TaggedError2) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TaggedError2) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"tag", "error"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TaggedError2) GetTag() string {
+func (t *TaggedError2) GetTag() string {
 	return "tag2"
 }
 
-func (o *TaggedError2) GetError() Error {
-	if o == nil {
+func (t *TaggedError2) GetError() Error {
+	if t == nil {
 		return Error{}
 	}
-	return o.Error
+	return t.Error
 }

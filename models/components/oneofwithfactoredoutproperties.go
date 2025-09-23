@@ -20,6 +20,17 @@ type OneOfWithFactoredOutPropertiesSimpleObject struct {
 	AnExtraProperty *string `json:"anExtraProperty,omitempty"`
 }
 
+func (o OneOfWithFactoredOutPropertiesSimpleObject) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(o, "", false)
+}
+
+func (o *OneOfWithFactoredOutPropertiesSimpleObject) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"str"}); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o *OneOfWithFactoredOutPropertiesSimpleObject) GetStr() string {
 	if o == nil {
 		return ""
@@ -102,8 +113,8 @@ const (
 )
 
 type ExhaustiveObjectAny struct {
-	SimpleObject *SimpleObject `queryParam:"inline"`
-	Str          *string       `queryParam:"inline"`
+	SimpleObject *SimpleObject `queryParam:"inline" name:"any"`
+	Str          *string       `queryParam:"inline" name:"any"`
 
 	Type ExhaustiveObjectAnyType
 }
@@ -129,14 +140,14 @@ func CreateExhaustiveObjectAnyStr(str string) ExhaustiveObjectAny {
 func (u *ExhaustiveObjectAny) UnmarshalJSON(data []byte) error {
 
 	var simpleObject SimpleObject = SimpleObject{}
-	if err := utils.UnmarshalJSON(data, &simpleObject, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &simpleObject, "", true, nil); err == nil {
 		u.SimpleObject = &simpleObject
 		u.Type = ExhaustiveObjectAnyTypeSimpleObject
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = ExhaustiveObjectAnyTypeStr
 		return nil
@@ -316,7 +327,7 @@ func (o OneOfWithFactoredOutPropertiesExhaustiveObject) MarshalJSON() ([]byte, e
 }
 
 func (o *OneOfWithFactoredOutPropertiesExhaustiveObject) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"str", "bool", "int", "int32", "num", "float32", "date", "dateTime", "anything", "int32Enum", "bigint", "decimalStr", "obj", "map", "arr", "any", "nullableStringEnum", "icon"}); err != nil {
 		return err
 	}
 	return nil
@@ -552,8 +563,8 @@ const (
 
 // OneOfWithFactoredOutProperties - A union of two types with factored out properties.
 type OneOfWithFactoredOutProperties struct {
-	OneOfWithFactoredOutPropertiesExhaustiveObject *OneOfWithFactoredOutPropertiesExhaustiveObject `queryParam:"inline"`
-	OneOfWithFactoredOutPropertiesSimpleObject     *OneOfWithFactoredOutPropertiesSimpleObject     `queryParam:"inline"`
+	OneOfWithFactoredOutPropertiesExhaustiveObject *OneOfWithFactoredOutPropertiesExhaustiveObject `queryParam:"inline" name:"OneOfWithFactoredOutProperties"`
+	OneOfWithFactoredOutPropertiesSimpleObject     *OneOfWithFactoredOutPropertiesSimpleObject     `queryParam:"inline" name:"OneOfWithFactoredOutProperties"`
 
 	Type OneOfWithFactoredOutPropertiesType
 }
@@ -578,17 +589,17 @@ func CreateOneOfWithFactoredOutPropertiesOneOfWithFactoredOutPropertiesSimpleObj
 
 func (u *OneOfWithFactoredOutProperties) UnmarshalJSON(data []byte) error {
 
-	var oneOfWithFactoredOutPropertiesSimpleObject OneOfWithFactoredOutPropertiesSimpleObject = OneOfWithFactoredOutPropertiesSimpleObject{}
-	if err := utils.UnmarshalJSON(data, &oneOfWithFactoredOutPropertiesSimpleObject, "", true, true); err == nil {
-		u.OneOfWithFactoredOutPropertiesSimpleObject = &oneOfWithFactoredOutPropertiesSimpleObject
-		u.Type = OneOfWithFactoredOutPropertiesTypeOneOfWithFactoredOutPropertiesSimpleObject
+	var oneOfWithFactoredOutPropertiesExhaustiveObject OneOfWithFactoredOutPropertiesExhaustiveObject = OneOfWithFactoredOutPropertiesExhaustiveObject{}
+	if err := utils.UnmarshalJSON(data, &oneOfWithFactoredOutPropertiesExhaustiveObject, "", true, nil); err == nil {
+		u.OneOfWithFactoredOutPropertiesExhaustiveObject = &oneOfWithFactoredOutPropertiesExhaustiveObject
+		u.Type = OneOfWithFactoredOutPropertiesTypeOneOfWithFactoredOutPropertiesExhaustiveObject
 		return nil
 	}
 
-	var oneOfWithFactoredOutPropertiesExhaustiveObject OneOfWithFactoredOutPropertiesExhaustiveObject = OneOfWithFactoredOutPropertiesExhaustiveObject{}
-	if err := utils.UnmarshalJSON(data, &oneOfWithFactoredOutPropertiesExhaustiveObject, "", true, true); err == nil {
-		u.OneOfWithFactoredOutPropertiesExhaustiveObject = &oneOfWithFactoredOutPropertiesExhaustiveObject
-		u.Type = OneOfWithFactoredOutPropertiesTypeOneOfWithFactoredOutPropertiesExhaustiveObject
+	var oneOfWithFactoredOutPropertiesSimpleObject OneOfWithFactoredOutPropertiesSimpleObject = OneOfWithFactoredOutPropertiesSimpleObject{}
+	if err := utils.UnmarshalJSON(data, &oneOfWithFactoredOutPropertiesSimpleObject, "", true, nil); err == nil {
+		u.OneOfWithFactoredOutPropertiesSimpleObject = &oneOfWithFactoredOutPropertiesSimpleObject
+		u.Type = OneOfWithFactoredOutPropertiesTypeOneOfWithFactoredOutPropertiesSimpleObject
 		return nil
 	}
 

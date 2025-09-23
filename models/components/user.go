@@ -13,58 +13,58 @@ type User struct {
 	Metadata      *Metadata `json:"metadata,omitempty"`
 }
 
-func (o *User) GetID() string {
-	if o == nil {
+func (u *User) GetID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ID
+	return u.ID
 }
 
-func (o *User) GetEmail() string {
-	if o == nil {
+func (u *User) GetEmail() string {
+	if u == nil {
 		return ""
 	}
-	return o.Email
+	return u.Email
 }
 
-func (o *User) GetFirstName() *string {
-	if o == nil {
+func (u *User) GetFirstName() *string {
+	if u == nil {
 		return nil
 	}
-	return o.FirstName
+	return u.FirstName
 }
 
-func (o *User) GetLastName() *string {
-	if o == nil {
+func (u *User) GetLastName() *string {
+	if u == nil {
 		return nil
 	}
-	return o.LastName
+	return u.LastName
 }
 
-func (o *User) GetAge() *float64 {
-	if o == nil {
+func (u *User) GetAge() *float64 {
+	if u == nil {
 		return nil
 	}
-	return o.Age
+	return u.Age
 }
 
-func (o *User) GetPostalCode() *string {
-	if o == nil {
+func (u *User) GetPostalCode() *string {
+	if u == nil {
 		return nil
 	}
-	return o.PostalCode
+	return u.PostalCode
 }
 
-func (o *User) GetAssociatedIds() []string {
-	if o == nil {
+func (u *User) GetAssociatedIds() []string {
+	if u == nil {
 		return nil
 	}
-	return o.AssociatedIds
+	return u.AssociatedIds
 }
 
-func (o *User) GetMetadata() *Metadata {
-	if o == nil {
+func (u *User) GetMetadata() *Metadata {
+	if u == nil {
 		return nil
 	}
-	return o.Metadata
+	return u.Metadata
 }

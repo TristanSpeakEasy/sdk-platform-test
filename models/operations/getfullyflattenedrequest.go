@@ -12,11 +12,11 @@ type GetFullyFlattenedRequestSecurity struct {
 	APIKey *string `security:"scheme,type=apiKey,subtype=header,name=api_key,env=sdk_api_key"`
 }
 
-func (o *GetFullyFlattenedRequestSecurity) GetAPIKey() *string {
-	if o == nil {
+func (g *GetFullyFlattenedRequestSecurity) GetAPIKey() *string {
+	if g == nil {
 		return nil
 	}
-	return o.APIKey
+	return g.APIKey
 }
 
 type Emoji string
@@ -59,39 +59,39 @@ type GetFullyFlattenedRequestRequestBody struct {
 	Private *bool   `json:"private,omitempty"`
 }
 
-func (o *GetFullyFlattenedRequestRequestBody) GetName() string {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequestBody) GetName() string {
+	if g == nil {
 		return ""
 	}
-	return o.Name
+	return g.Name
 }
 
-func (o *GetFullyFlattenedRequestRequestBody) GetEmoji() *Emoji {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequestBody) GetEmoji() *Emoji {
+	if g == nil {
 		return nil
 	}
-	return o.Emoji
+	return g.Emoji
 }
 
-func (o *GetFullyFlattenedRequestRequestBody) GetGif() *string {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequestBody) GetGif() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Gif
+	return g.Gif
 }
 
-func (o *GetFullyFlattenedRequestRequestBody) GetReply() *bool {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequestBody) GetReply() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.Reply
+	return g.Reply
 }
 
-func (o *GetFullyFlattenedRequestRequestBody) GetPrivate() *bool {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequestBody) GetPrivate() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.Private
+	return g.Private
 }
 
 type GetFullyFlattenedRequestRequest struct {
@@ -100,34 +100,34 @@ type GetFullyFlattenedRequestRequest struct {
 	RequestBody GetFullyFlattenedRequestRequestBody `request:"mediaType=application/json"`
 }
 
-func (o *GetFullyFlattenedRequestRequest) GetLang() string {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequest) GetLang() string {
+	if g == nil {
 		return ""
 	}
-	return o.Lang
+	return g.Lang
 }
 
-func (o *GetFullyFlattenedRequestRequest) GetMaxLength() *int64 {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequest) GetMaxLength() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.MaxLength
+	return g.MaxLength
 }
 
-func (o *GetFullyFlattenedRequestRequest) GetRequestBody() GetFullyFlattenedRequestRequestBody {
-	if o == nil {
+func (g *GetFullyFlattenedRequestRequest) GetRequestBody() GetFullyFlattenedRequestRequestBody {
+	if g == nil {
 		return GetFullyFlattenedRequestRequestBody{}
 	}
-	return o.RequestBody
+	return g.RequestBody
 }
 
 type GetFullyFlattenedRequestResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-func (o *GetFullyFlattenedRequestResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetFullyFlattenedRequestResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }

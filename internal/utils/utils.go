@@ -41,8 +41,8 @@ func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}, tag string) 
 	if err != nil {
 		return fmt.Errorf("error reading response body: %w", err)
 	}
-	if err := UnmarshalJSON(data, out, reflect.StructTag(tag), true, false); err != nil {
-		return fmt.Errorf("error unmarshalling json response body: %w", err)
+	if err := UnmarshalJSON(data, out, reflect.StructTag(tag), true, nil); err != nil {
+		return fmt.Errorf("error unmarshaling json response body: %w", err)
 	}
 
 	return nil
@@ -138,6 +138,26 @@ func ValueFromEnvVar(envVar string, field interface{}) interface{} {
 		}
 	}
 	return nil
+}
+
+func parseConstTag(field reflect.StructField) *string {
+	value := field.Tag.Get("const")
+
+	if value == "" {
+		return nil
+	}
+
+	return &value
+}
+
+func parseDefaultTag(field reflect.StructField) *string {
+	value := field.Tag.Get("default")
+
+	if value == "" {
+		return nil
+	}
+
+	return &value
 }
 
 func parseStructTag(tagKey string, field reflect.StructField) map[string]string {

@@ -11,18 +11,18 @@ type UpdateUserRequest struct {
 	User components.User `request:"mediaType=application/json"`
 }
 
-func (o *UpdateUserRequest) GetID() string {
-	if o == nil {
+func (u *UpdateUserRequest) GetID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ID
+	return u.ID
 }
 
-func (o *UpdateUserRequest) GetUser() components.User {
-	if o == nil {
+func (u *UpdateUserRequest) GetUser() components.User {
+	if u == nil {
 		return components.User{}
 	}
-	return o.User
+	return u.User
 }
 
 type UpdateUserResponse struct {
@@ -31,16 +31,16 @@ type UpdateUserResponse struct {
 	User *components.User
 }
 
-func (o *UpdateUserResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (u *UpdateUserResponse) GetHTTPMeta() components.HTTPMetadata {
+	if u == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return u.HTTPMeta
 }
 
-func (o *UpdateUserResponse) GetUser() *components.User {
-	if o == nil {
+func (u *UpdateUserResponse) GetUser() *components.User {
+	if u == nil {
 		return nil
 	}
-	return o.User
+	return u.User
 }

@@ -18,6 +18,7 @@ Deprecated Operation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="deprecated1" method="get" path="/deprecated" -->
 ```go
 package main
 
@@ -29,10 +30,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.Tag1.Deprecated1(ctx)
     if err != nil {
@@ -68,27 +67,28 @@ It has a description.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="listTest1" method="get" path="/test1/{page}" -->
 ```go
 package main
 
 import(
 	"context"
 	sdkplatformtest "github.com/tristanspeakeasy/sdk-platform-test"
-	"github.com/tristanspeakeasy/sdk-platform-test/models/operations"
 	"os"
+	"github.com/tristanspeakeasy/sdk-platform-test/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
-    
+
     s := sdkplatformtest.New(
         sdkplatformtest.WithQueryParam1("some example query param"),
     )
 
     res, err := s.Tag1.ListTest1(ctx, operations.ListTest1Security{
         APIKey: os.Getenv("SDK_API_KEY"),
-    }, operations.QueryParam2One, 100, "some example header param", sdkplatformtest.String("some example query param"))
+    }, operations.QueryParam2One, 100, "some example header param")
     if err != nil {
         log.Fatal(err)
     }

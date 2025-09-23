@@ -39,16 +39,16 @@ type Test2Request struct {
 	Type *Type            `json:"type,omitempty"`
 }
 
-func (o *Test2Request) GetObj() ExhaustiveObject {
-	if o == nil {
+func (t *Test2Request) GetObj() ExhaustiveObject {
+	if t == nil {
 		return ExhaustiveObject{}
 	}
-	return o.Obj
+	return t.Obj
 }
 
-func (o *Test2Request) GetType() *Type {
-	if o == nil {
+func (t *Test2Request) GetType() *Type {
+	if t == nil {
 		return nil
 	}
-	return o.Type
+	return t.Type
 }

@@ -81,8 +81,8 @@ const (
 )
 
 type Any struct {
-	SimpleObject *SimpleObject `queryParam:"inline"`
-	Str          *string       `queryParam:"inline"`
+	SimpleObject *SimpleObject `queryParam:"inline" name:"any"`
+	Str          *string       `queryParam:"inline" name:"any"`
 
 	Type AnyType
 }
@@ -108,14 +108,14 @@ func CreateAnyStr(str string) Any {
 func (u *Any) UnmarshalJSON(data []byte) error {
 
 	var simpleObject SimpleObject = SimpleObject{}
-	if err := utils.UnmarshalJSON(data, &simpleObject, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &simpleObject, "", true, nil); err == nil {
 		u.SimpleObject = &simpleObject
 		u.Type = AnyTypeSimpleObject
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = AnyTypeStr
 		return nil
@@ -293,222 +293,222 @@ func (e ExhaustiveObject) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ExhaustiveObject) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"str", "bool", "int", "int32", "num", "float32", "date", "dateTime", "anything", "int32Enum", "bigint", "decimalStr", "obj", "map", "arr", "any", "nullableStringEnum", "icon"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ExhaustiveObject) GetStr() string {
-	if o == nil {
+func (e *ExhaustiveObject) GetStr() string {
+	if e == nil {
 		return ""
 	}
-	return o.Str
+	return e.Str
 }
 
-func (o *ExhaustiveObject) GetBool() bool {
-	if o == nil {
+func (e *ExhaustiveObject) GetBool() bool {
+	if e == nil {
 		return false
 	}
-	return o.Bool
+	return e.Bool
 }
 
-func (o *ExhaustiveObject) GetInteger() int64 {
-	if o == nil {
+func (e *ExhaustiveObject) GetInteger() int64 {
+	if e == nil {
 		return 0
 	}
-	return o.Integer
+	return e.Integer
 }
 
-func (o *ExhaustiveObject) GetInt32() int {
-	if o == nil {
+func (e *ExhaustiveObject) GetInt32() int {
+	if e == nil {
 		return 0
 	}
-	return o.Int32
+	return e.Int32
 }
 
-func (o *ExhaustiveObject) GetNum() float64 {
-	if o == nil {
+func (e *ExhaustiveObject) GetNum() float64 {
+	if e == nil {
 		return 0.0
 	}
-	return o.Num
+	return e.Num
 }
 
-func (o *ExhaustiveObject) GetFloat32() float32 {
-	if o == nil {
+func (e *ExhaustiveObject) GetFloat32() float32 {
+	if e == nil {
 		return 0.0
 	}
-	return o.Float32
+	return e.Float32
 }
 
-func (o *ExhaustiveObject) GetEnumProp() *Enum {
-	if o == nil {
+func (e *ExhaustiveObject) GetEnumProp() *Enum {
+	if e == nil {
 		return nil
 	}
-	return o.EnumProp
+	return e.EnumProp
 }
 
-func (o *ExhaustiveObject) GetDate() types.Date {
-	if o == nil {
+func (e *ExhaustiveObject) GetDate() types.Date {
+	if e == nil {
 		return types.Date{}
 	}
-	return o.Date
+	return e.Date
 }
 
-func (o *ExhaustiveObject) GetDateTime() time.Time {
-	if o == nil {
+func (e *ExhaustiveObject) GetDateTime() time.Time {
+	if e == nil {
 		return time.Time{}
 	}
-	return o.DateTime
+	return e.DateTime
 }
 
-func (o *ExhaustiveObject) GetAnything() any {
-	if o == nil {
+func (e *ExhaustiveObject) GetAnything() any {
+	if e == nil {
 		return nil
 	}
-	return o.Anything
+	return e.Anything
 }
 
-func (o *ExhaustiveObject) GetStrOpt() *string {
-	if o == nil {
+func (e *ExhaustiveObject) GetStrOpt() *string {
+	if e == nil {
 		return nil
 	}
-	return o.StrOpt
+	return e.StrOpt
 }
 
-func (o *ExhaustiveObject) GetBoolOpt() *bool {
-	if o == nil {
+func (e *ExhaustiveObject) GetBoolOpt() *bool {
+	if e == nil {
 		return nil
 	}
-	return o.BoolOpt
+	return e.BoolOpt
 }
 
-func (o *ExhaustiveObject) GetIntOptNull() *int64 {
-	if o == nil {
+func (e *ExhaustiveObject) GetIntOptNull() *int64 {
+	if e == nil {
 		return nil
 	}
-	return o.IntOptNull
+	return e.IntOptNull
 }
 
-func (o *ExhaustiveObject) GetNumOptNull() *float64 {
-	if o == nil {
+func (e *ExhaustiveObject) GetNumOptNull() *float64 {
+	if e == nil {
 		return nil
 	}
-	return o.NumOptNull
+	return e.NumOptNull
 }
 
-func (o *ExhaustiveObject) GetIntEnum() *IntEnum {
-	if o == nil {
+func (e *ExhaustiveObject) GetIntEnum() *IntEnum {
+	if e == nil {
 		return nil
 	}
-	return o.IntEnum
+	return e.IntEnum
 }
 
-func (o *ExhaustiveObject) GetInt32Enum() Int32Enum {
-	if o == nil {
+func (e *ExhaustiveObject) GetInt32Enum() Int32Enum {
+	if e == nil {
 		return Int32Enum(0)
 	}
-	return o.Int32Enum
+	return e.Int32Enum
 }
 
-func (o *ExhaustiveObject) GetBigint() *big.Int {
-	if o == nil {
+func (e *ExhaustiveObject) GetBigint() *big.Int {
+	if e == nil {
 		return big.NewInt(0)
 	}
-	return o.Bigint
+	return e.Bigint
 }
 
-func (o *ExhaustiveObject) GetBigintStr() *big.Int {
-	if o == nil {
+func (e *ExhaustiveObject) GetBigintStr() *big.Int {
+	if e == nil {
 		return nil
 	}
-	return o.BigintStr
+	return e.BigintStr
 }
 
-func (o *ExhaustiveObject) GetDecimal() *decimal.Big {
+func (e *ExhaustiveObject) GetDecimal() *decimal.Big {
 	return types.MustNewDecimalFromString("3.141592653589")
 }
 
-func (o *ExhaustiveObject) GetDecimalStr() *decimal.Big {
-	if o == nil {
+func (e *ExhaustiveObject) GetDecimalStr() *decimal.Big {
+	if e == nil {
 		return new(decimal.Big).SetFloat64(0.0)
 	}
-	return o.DecimalStr
+	return e.DecimalStr
 }
 
-func (o *ExhaustiveObject) GetObj() SimpleObject {
-	if o == nil {
+func (e *ExhaustiveObject) GetObj() SimpleObject {
+	if e == nil {
 		return SimpleObject{}
 	}
-	return o.Obj
+	return e.Obj
 }
 
-func (o *ExhaustiveObject) GetMap() map[string]SimpleObject {
-	if o == nil {
+func (e *ExhaustiveObject) GetMap() map[string]SimpleObject {
+	if e == nil {
 		return map[string]SimpleObject{}
 	}
-	return o.Map
+	return e.Map
 }
 
-func (o *ExhaustiveObject) GetArr() []SimpleObject {
-	if o == nil {
+func (e *ExhaustiveObject) GetArr() []SimpleObject {
+	if e == nil {
 		return []SimpleObject{}
 	}
-	return o.Arr
+	return e.Arr
 }
 
-func (o *ExhaustiveObject) GetAny() Any {
-	if o == nil {
+func (e *ExhaustiveObject) GetAny() Any {
+	if e == nil {
 		return Any{}
 	}
-	return o.Any
+	return e.Any
 }
 
-func (o *ExhaustiveObject) GetType() *string {
-	if o == nil {
+func (e *ExhaustiveObject) GetType() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Type
+	return e.Type
 }
 
-func (o *ExhaustiveObject) GetSomePropertyWithDots() *string {
-	if o == nil {
+func (e *ExhaustiveObject) GetSomePropertyWithDots() *string {
+	if e == nil {
 		return nil
 	}
-	return o.SomePropertyWithDots
+	return e.SomePropertyWithDots
 }
 
-func (o *ExhaustiveObject) GetNullableIntEnum() *NullableIntEnum {
-	if o == nil {
+func (e *ExhaustiveObject) GetNullableIntEnum() *NullableIntEnum {
+	if e == nil {
 		return nil
 	}
-	return o.NullableIntEnum
+	return e.NullableIntEnum
 }
 
-func (o *ExhaustiveObject) GetNullableStringEnum() NullableStringEnum {
-	if o == nil {
+func (e *ExhaustiveObject) GetNullableStringEnum() NullableStringEnum {
+	if e == nil {
 		return NullableStringEnum("")
 	}
-	return o.NullableStringEnum
+	return e.NullableStringEnum
 }
 
-func (o *ExhaustiveObject) GetColor() *Color {
-	if o == nil {
+func (e *ExhaustiveObject) GetColor() *Color {
+	if e == nil {
 		return nil
 	}
-	return o.Color
+	return e.Color
 }
 
-func (o *ExhaustiveObject) GetIcon() Icon {
-	if o == nil {
+func (e *ExhaustiveObject) GetIcon() Icon {
+	if e == nil {
 		return Icon("")
 	}
-	return o.Icon
+	return e.Icon
 }
 
-func (o *ExhaustiveObject) GetHeroWidth() *HeroWidth {
-	if o == nil {
+func (e *ExhaustiveObject) GetHeroWidth() *HeroWidth {
+	if e == nil {
 		return nil
 	}
-	return o.HeroWidth
+	return e.HeroWidth
 }

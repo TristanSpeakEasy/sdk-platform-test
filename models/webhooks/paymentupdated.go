@@ -37,27 +37,27 @@ type PaymentUpdatedRequestBody struct {
 	Type   PaymentUpdatedType `json:"type"`
 }
 
-func (o *PaymentUpdatedRequestBody) GetAmount() string {
-	if o == nil {
+func (p *PaymentUpdatedRequestBody) GetAmount() string {
+	if p == nil {
 		return ""
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PaymentUpdatedRequestBody) GetType() PaymentUpdatedType {
-	if o == nil {
+func (p *PaymentUpdatedRequestBody) GetType() PaymentUpdatedType {
+	if p == nil {
 		return PaymentUpdatedType("")
 	}
-	return o.Type
+	return p.Type
 }
 
 type PaymentUpdatedResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 }
 
-func (o *PaymentUpdatedResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (p *PaymentUpdatedResponse) GetHTTPMeta() components.HTTPMetadata {
+	if p == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return p.HTTPMeta
 }

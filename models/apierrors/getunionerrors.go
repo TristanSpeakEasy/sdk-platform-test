@@ -19,8 +19,8 @@ const (
 
 // GetUnionErrorsResponseBody - Something went wrong
 type GetUnionErrorsResponseBody struct {
-	TaggedError1 *components.TaggedError1 `queryParam:"inline"`
-	TaggedError2 *components.TaggedError2 `queryParam:"inline"`
+	TaggedError1 *components.TaggedError1 `queryParam:"inline" name:"responseBody"`
+	TaggedError2 *components.TaggedError2 `queryParam:"inline" name:"responseBody"`
 
 	Type GetUnionErrorsResponseBodyType
 
@@ -64,7 +64,7 @@ func (u *GetUnionErrorsResponseBody) UnmarshalJSON(data []byte) error {
 	switch dis.Tag {
 	case "tag1":
 		taggedError1 := new(components.TaggedError1)
-		if err := utils.UnmarshalJSON(data, &taggedError1, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &taggedError1, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Tag == tag1) type components.TaggedError1 within GetUnionErrorsResponseBody: %w", string(data), err)
 		}
 
@@ -73,7 +73,7 @@ func (u *GetUnionErrorsResponseBody) UnmarshalJSON(data []byte) error {
 		return nil
 	case "tag2":
 		taggedError2 := new(components.TaggedError2)
-		if err := utils.UnmarshalJSON(data, &taggedError2, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &taggedError2, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Tag == tag2) type components.TaggedError2 within GetUnionErrorsResponseBody: %w", string(data), err)
 		}
 
@@ -119,8 +119,8 @@ const (
 
 // GetUnionErrorsResponseResponseBody - Internal Server Error
 type GetUnionErrorsResponseResponseBody struct {
-	ErrorType1 *components.ErrorType1 `queryParam:"inline"`
-	ErrorType2 *components.ErrorType2 `queryParam:"inline"`
+	ErrorType1 *components.ErrorType1 `queryParam:"inline" name:"responseBody"`
+	ErrorType2 *components.ErrorType2 `queryParam:"inline" name:"responseBody"`
 
 	Type GetUnionErrorsResponseResponseBodyType
 
@@ -149,17 +149,17 @@ func CreateGetUnionErrorsResponseResponseBodyErrorType2(errorType2 components.Er
 
 func (u *GetUnionErrorsResponseResponseBody) UnmarshalJSON(data []byte) error {
 
-	var errorType2 components.ErrorType2 = components.ErrorType2{}
-	if err := utils.UnmarshalJSON(data, &errorType2, "", true, true); err == nil {
-		u.ErrorType2 = &errorType2
-		u.Type = GetUnionErrorsResponseResponseBodyTypeErrorType2
+	var errorType1 components.ErrorType1 = components.ErrorType1{}
+	if err := utils.UnmarshalJSON(data, &errorType1, "", true, nil); err == nil {
+		u.ErrorType1 = &errorType1
+		u.Type = GetUnionErrorsResponseResponseBodyTypeErrorType1
 		return nil
 	}
 
-	var errorType1 components.ErrorType1 = components.ErrorType1{}
-	if err := utils.UnmarshalJSON(data, &errorType1, "", true, true); err == nil {
-		u.ErrorType1 = &errorType1
-		u.Type = GetUnionErrorsResponseResponseBodyTypeErrorType1
+	var errorType2 components.ErrorType2 = components.ErrorType2{}
+	if err := utils.UnmarshalJSON(data, &errorType2, "", true, nil); err == nil {
+		u.ErrorType2 = &errorType2
+		u.Type = GetUnionErrorsResponseResponseBodyTypeErrorType2
 		return nil
 	}
 

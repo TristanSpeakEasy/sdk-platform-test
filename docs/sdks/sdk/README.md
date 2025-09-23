@@ -28,6 +28,7 @@ Speakeasy Docs
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="_operation_with_leading_and_trailing_underscores_" method="get" path="/test_operation_id_with_underscores" -->
 ```go
 package main
 
@@ -39,10 +40,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.OperationWithLeadingAndTrailingUnderscores(ctx)
     if err != nil {
@@ -78,6 +77,7 @@ It has a description.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="postFile" method="post" path="/file" -->
 ```go
 package main
 
@@ -92,21 +92,18 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
 
-    content, fileErr := os.Open("example.file")
+    s := sdkplatformtest.New()
+
+    example, fileErr := os.Open("example.file")
     if fileErr != nil {
         panic(fileErr)
     }
 
-
     res, err := s.PostFile(ctx, operations.PostFileRequestBody{
         File: components.File{
             FileName: "example.file",
-            Content: content,
+            Content: example,
         },
     })
     if err != nil {
@@ -134,12 +131,14 @@ func main() {
 
 | Error Type       | Status Code      | Content Type     |
 | ---------------- | ---------------- | ---------------- |
-| apierrors.Error  | 415, 4XX, 5XX    | application/json |
+| apierrors.Error  | 415, 4XX         | application/json |
+| apierrors.Error  | 5XX              | application/json |
 
 ## GetPolymorphism
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getPolymorphism" method="get" path="/polymorphism" -->
 ```go
 package main
 
@@ -151,10 +150,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.GetPolymorphism(ctx)
     if err != nil {
@@ -187,6 +184,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getUnionErrors" method="get" path="/unionErrors" -->
 ```go
 package main
 
@@ -198,10 +196,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.GetUnionErrors(ctx, 12)
     if err != nil {
@@ -250,6 +246,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getRequestBodyFlattenedAway" method="get" path="/requestBodyFlattenedAway" -->
 ```go
 package main
 
@@ -261,9 +258,9 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
+        sdkplatformtest.WithLoneQueryParam("<value>"),
     )
 
     res, err := s.GetRequestBodyFlattenedAway(ctx)
@@ -297,6 +294,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getFullyFlattenedRequest" method="post" path="/fullyFlattenedRequest" -->
 ```go
 package main
 
@@ -309,10 +307,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.GetFullyFlattenedRequest(ctx, "en", operations.GetFullyFlattenedRequestRequestBody{
         Name: "<value>",
@@ -351,6 +347,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="testEndpoint" method="post" path="/test/endpoint/{testName}" -->
 ```go
 package main
 
@@ -363,10 +360,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.TestEndpoint(ctx, "<value>", operations.TestEndpointRequestBody{
         Test: "<value>",
@@ -405,6 +400,7 @@ Create User
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="createUser" method="put" path="/user" -->
 ```go
 package main
 
@@ -417,14 +413,12 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.CreateUser(ctx, components.BaseUser{
-        ID: sdkplatformtest.String("8ffac18c-7d88-4879-b057-e5f45b9ce7de"),
-        Email: "Creola.Kutch71@yahoo.com",
+        ID: sdkplatformtest.Pointer("8ffac18c-7d88-4879-b057-e5f45b9ce7de"),
+        Email: "Aglae92@gmail.com",
     })
     if err != nil {
         log.Fatal(err)
@@ -459,6 +453,7 @@ Get User
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getUser" method="get" path="/user/{id}" -->
 ```go
 package main
 
@@ -470,10 +465,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.GetUser(ctx, "<id>")
     if err != nil {
@@ -509,6 +502,7 @@ Update User
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="updateUser" method="post" path="/user/{id}" -->
 ```go
 package main
 
@@ -521,14 +515,12 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.UpdateUser(ctx, "<id>", components.User{
         ID: "8ffac18c-7d88-4879-b057-e5f45b9ce7de",
-        Email: "Micah.Stracke@gmail.com",
+        Email: "Joanny.Feeney@gmail.com",
     })
     if err != nil {
         log.Fatal(err)
@@ -564,6 +556,7 @@ Delete User
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="deleteUser" method="delete" path="/user/{id}" -->
 ```go
 package main
 
@@ -575,10 +568,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.DeleteUser(ctx, "<id>")
     if err != nil {
@@ -612,6 +603,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="chat" method="post" path="/chat" -->
 ```go
 package main
 
@@ -624,13 +616,11 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.Chat(ctx, operations.ChatRequestBody{
-        Prompt: sdkplatformtest.String("What is the largest city in the world?"),
+        Prompt: sdkplatformtest.Pointer("What is the largest city in the world?"),
     })
     if err != nil {
         log.Fatal(err)
@@ -669,6 +659,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="getBinaryDefaultResponse" method="get" path="/binaryDefaultResponse" -->
 ```go
 package main
 
@@ -680,10 +671,8 @@ import(
 
 func main() {
     ctx := context.Background()
-    
-    s := sdkplatformtest.New(
-        sdkplatformtest.WithQueryParam1("some example query param"),
-    )
+
+    s := sdkplatformtest.New()
 
     res, err := s.GetBinaryDefaultResponse(ctx)
     if err != nil {

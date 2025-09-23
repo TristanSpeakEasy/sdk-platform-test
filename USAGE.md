@@ -14,11 +14,9 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
-	)
+	s := sdkplatformtest.New()
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -26,7 +24,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -55,7 +53,8 @@ func main() {
 	ctx := context.Background()
 
 	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
+		sdkplatformtest.WithDeprecatedQueryParam1("some example query param"),
+		sdkplatformtest.WithDeprecatedQueryParam2("some example query param"),
 	)
 
 	res, err := s.TestGroup.Tag2.PostTest(ctx, components.Test2Request{
@@ -65,54 +64,39 @@ func main() {
 			Integer:    999999,
 			Int32:      1,
 			Num:        1.1,
-			Float32:    4344.96,
-			EnumProp:   components.EnumFirst.ToPointer(),
-			Date:       types.MustDateFromString("2024-02-10"),
+			Float32:    8499.3,
+			Date:       types.MustDateFromString("2024-10-12"),
 			DateTime:   types.MustTimeFromString("2020-01-01T00:00:00Z"),
 			Anything:   "<value>",
-			BoolOpt:    sdkplatformtest.Bool(true),
-			IntOptNull: sdkplatformtest.Int64(999999),
-			NumOptNull: sdkplatformtest.Float64(1.1),
+			BoolOpt:    sdkplatformtest.Pointer(true),
+			IntOptNull: sdkplatformtest.Pointer[int64](999999),
+			NumOptNull: sdkplatformtest.Pointer[float64](1.1),
 			IntEnum:    components.IntEnumThird.ToPointer(),
 			Int32Enum:  components.Int32EnumSixtyNine,
-			Bigint:     big.NewInt(119171),
-			DecimalStr: types.MustNewDecimalFromString("4560.33"),
+			Bigint:     big.NewInt(702830),
+			DecimalStr: types.MustNewDecimalFromString("3858.6"),
 			Obj: components.SimpleObject{
 				Str: "example",
 			},
-			Map: map[string]components.SimpleObject{
-				"key": components.SimpleObject{
-					Str: "example",
-				},
-				"key1": components.SimpleObject{
-					Str: "example",
-				},
-				"key2": components.SimpleObject{
-					Str: "example",
-				},
-			},
+			Map: map[string]components.SimpleObject{},
 			Arr: []components.SimpleObject{
 				components.SimpleObject{
 					Str: "example",
 				},
-				components.SimpleObject{
-					Str: "example",
-				},
-				components.SimpleObject{
-					Str: "example",
-				},
 			},
-			Any: components.CreateAnyStr(
-				"<value>",
+			Any: components.CreateAnySimpleObject(
+				components.SimpleObject{
+					Str: "example",
+				},
 			),
 			NullableIntEnum:    components.NullableIntEnumThird.ToPointer(),
-			NullableStringEnum: components.NullableStringEnumThird,
+			NullableStringEnum: components.NullableStringEnumSecond,
 			Color:              components.ColorGreen.ToPointer(),
 			Icon:               components.IconTick,
 			HeroWidth:          components.HeroWidthFourHundredAndEighty.ToPointer(),
 		},
 		Type: components.TypeSuperType1.ToPointer(),
-	}, nil, sdkplatformtest.String("some example query param"))
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -147,7 +131,7 @@ func main() {
 
 	res, err := s.Tag1.ListTest1(ctx, operations.ListTest1Security{
 		APIKey: os.Getenv("SDK_API_KEY"),
-	}, operations.QueryParam2One, 100, "some example header param", sdkplatformtest.String("some example query param"))
+	}, operations.QueryParam2One, 100, "some example header param")
 	if err != nil {
 		log.Fatal(err)
 	}

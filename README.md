@@ -52,7 +52,7 @@ For more information about the API: [Speakeasy Docs](https://speakeasy.com/docs)
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/TristanSpeakEasy/sdk-platform-test
+go get github.com/tristanspeakeasy/sdk-platform-test
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -76,11 +76,9 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
-	)
+	s := sdkplatformtest.New()
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -88,7 +86,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -119,7 +117,8 @@ func main() {
 	ctx := context.Background()
 
 	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
+		sdkplatformtest.WithDeprecatedQueryParam1("some example query param"),
+		sdkplatformtest.WithDeprecatedQueryParam2("some example query param"),
 	)
 
 	res, err := s.TestGroup.Tag2.PostTest(ctx, components.Test2Request{
@@ -129,54 +128,39 @@ func main() {
 			Integer:    999999,
 			Int32:      1,
 			Num:        1.1,
-			Float32:    4344.96,
-			EnumProp:   components.EnumFirst.ToPointer(),
-			Date:       types.MustDateFromString("2024-02-10"),
+			Float32:    8499.3,
+			Date:       types.MustDateFromString("2024-10-12"),
 			DateTime:   types.MustTimeFromString("2020-01-01T00:00:00Z"),
 			Anything:   "<value>",
-			BoolOpt:    sdkplatformtest.Bool(true),
-			IntOptNull: sdkplatformtest.Int64(999999),
-			NumOptNull: sdkplatformtest.Float64(1.1),
+			BoolOpt:    sdkplatformtest.Pointer(true),
+			IntOptNull: sdkplatformtest.Pointer[int64](999999),
+			NumOptNull: sdkplatformtest.Pointer[float64](1.1),
 			IntEnum:    components.IntEnumThird.ToPointer(),
 			Int32Enum:  components.Int32EnumSixtyNine,
-			Bigint:     big.NewInt(119171),
-			DecimalStr: types.MustNewDecimalFromString("4560.33"),
+			Bigint:     big.NewInt(702830),
+			DecimalStr: types.MustNewDecimalFromString("3858.6"),
 			Obj: components.SimpleObject{
 				Str: "example",
 			},
-			Map: map[string]components.SimpleObject{
-				"key": components.SimpleObject{
-					Str: "example",
-				},
-				"key1": components.SimpleObject{
-					Str: "example",
-				},
-				"key2": components.SimpleObject{
-					Str: "example",
-				},
-			},
+			Map: map[string]components.SimpleObject{},
 			Arr: []components.SimpleObject{
 				components.SimpleObject{
 					Str: "example",
 				},
-				components.SimpleObject{
-					Str: "example",
-				},
-				components.SimpleObject{
-					Str: "example",
-				},
 			},
-			Any: components.CreateAnyStr(
-				"<value>",
+			Any: components.CreateAnySimpleObject(
+				components.SimpleObject{
+					Str: "example",
+				},
 			),
 			NullableIntEnum:    components.NullableIntEnumThird.ToPointer(),
-			NullableStringEnum: components.NullableStringEnumThird,
+			NullableStringEnum: components.NullableStringEnumSecond,
 			Color:              components.ColorGreen.ToPointer(),
 			Icon:               components.IconTick,
 			HeroWidth:          components.HeroWidthFourHundredAndEighty.ToPointer(),
 		},
 		Type: components.TypeSuperType1.ToPointer(),
-	}, nil, sdkplatformtest.String("some example query param"))
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -211,7 +195,7 @@ func main() {
 
 	res, err := s.Tag1.ListTest1(ctx, operations.ListTest1Security{
 		APIKey: os.Getenv("SDK_API_KEY"),
-	}, operations.QueryParam2One, 100, "some example header param", sdkplatformtest.String("some example query param"))
+	}, operations.QueryParam2One, 100, "some example header param")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -273,10 +257,9 @@ func main() {
 				Password: "<PASSWORD>",
 			},
 		}),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -284,7 +267,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -329,10 +312,9 @@ func main() {
 				APIKey:     os.Getenv("SDK_API_KEY"),
 			},
 		}),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -340,7 +322,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -383,10 +365,9 @@ func main() {
 				Oauth2: "Bearer <YOUR_OAUTH2_TOKEN>",
 			},
 		}),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -394,7 +375,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -438,10 +419,9 @@ func main() {
 				Secret: "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI",
 			},
 		}),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -449,7 +429,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -492,10 +472,9 @@ func main() {
 				MobileAuth: "Bearer <YOUR_OAUTH2_TOKEN>",
 			},
 		}),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -503,7 +482,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -532,13 +511,11 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
-	)
+	s := sdkplatformtest.New()
 
 	res, err := s.GetFullyFlattenedRequest(ctx, "en", operations.GetFullyFlattenedRequestRequestBody{
 		Name: "<value>",
-	}, nil, nil)
+	}, sdkplatformtest.Pointer(operations.GetFullyFlattenedRequestSecurity{}), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -626,7 +603,10 @@ func main() {
 	ctx := context.Background()
 
 	s := sdkplatformtest.New(
+		sdkplatformtest.WithLoneQueryParam("<value>"),
 		sdkplatformtest.WithQueryParam1("some example query param"),
+		sdkplatformtest.WithDeprecatedQueryParam1("some example query param"),
+		sdkplatformtest.WithDeprecatedQueryParam2("some example query param"),
 	)
 
 	res, err := s.GetRequestBodyFlattenedAway(ctx)
@@ -663,12 +643,10 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
-	)
+	s := sdkplatformtest.New()
 
 	res, err := s.Chat(ctx, operations.ChatRequestBody{
-		Prompt: sdkplatformtest.String("What is the largest city in the world?"),
+		Prompt: sdkplatformtest.Pointer("What is the largest city in the world?"),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -717,7 +695,7 @@ func main() {
 
 	res, err := s.Tag1.ListTest1(ctx, operations.ListTest1Security{
 		APIKey: os.Getenv("SDK_API_KEY"),
-	}, operations.QueryParam2One, 100, "some example header param", sdkplatformtest.String("some example query param"))
+	}, operations.QueryParam2One, 100, "some example header param")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -764,11 +742,9 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
-	)
+	s := sdkplatformtest.New()
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -776,7 +752,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	}, operations.WithRetries(
 		retry.Config{
@@ -828,10 +804,9 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -839,7 +814,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -885,9 +860,7 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := sdkplatformtest.New(
-		sdkplatformtest.WithQueryParam1("some example query param"),
-	)
+	s := sdkplatformtest.New()
 
 	res, err := s.GetUnionErrors(ctx, 12)
 	if err != nil {
@@ -928,14 +901,17 @@ func main() {
 
 You can override the default server globally using the `WithServerIndex(serverIndex int)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                     | Variables                           | Default values              |
-| --- | -------------------------- | ----------------------------------- | --------------------------- |
-| 0   | `http://localhost:35123`   |                                     |                             |
-| 1   | `http://{hostname}:{port}` | `hostname string`<br/>`port string` | `"localhost"`<br/>`"35123"` |
+| #   | Server                     | Variables             | Description                            |
+| --- | -------------------------- | --------------------- | -------------------------------------- |
+| 0   | `http://localhost:35123`   |                       | The default server.                    |
+| 1   | `http://{hostname}:{port}` | `hostname`<br/>`port` | A server url with templated variables. |
 
-If the selected server has variables, you may override their default values using their associated option(s):
- * `WithHostname(hostname string)`
- * `WithPort(port string)`
+If the selected server has variables, you may override its default values using the associated option(s):
+
+| Variable   | Option                          | Default       | Description                              |
+| ---------- | ------------------------------- | ------------- | ---------------------------------------- |
+| `hostname` | `WithHostname(hostname string)` | `"localhost"` | The hostname of the server.              |
+| `port`     | `WithPort(port string)`         | `"35123"`     | The port on which the server is running. |
 
 #### Example
 
@@ -956,10 +932,11 @@ func main() {
 
 	s := sdkplatformtest.New(
 		sdkplatformtest.WithServerIndex(1),
-		sdkplatformtest.WithQueryParam1("some example query param"),
+		sdkplatformtest.WithHostname("heavy-bowler.org"),
+		sdkplatformtest.WithPort("16766"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -967,7 +944,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -1000,10 +977,9 @@ func main() {
 
 	s := sdkplatformtest.New(
 		sdkplatformtest.WithServerURL("http://localhost:35123"),
-		sdkplatformtest.WithQueryParam1("some example query param"),
 	)
 
-	content, fileErr := os.Open("example.file")
+	example, fileErr := os.Open("example.file")
 	if fileErr != nil {
 		panic(fileErr)
 	}
@@ -1011,7 +987,7 @@ func main() {
 	res, err := s.PostFile(ctx, operations.PostFileRequestBody{
 		File: components.File{
 			FileName: "example.file",
-			Content:  content,
+			Content:  example,
 		},
 	})
 	if err != nil {
@@ -1047,7 +1023,7 @@ func main() {
 
 	res, err := s.Tag1.ListTest1(ctx, operations.ListTest1Security{
 		APIKey: os.Getenv("SDK_API_KEY"),
-	}, operations.QueryParam2One, 100, "some example header param", sdkplatformtest.String("some example query param"), operations.WithServerURL("http://localhost:35123"))
+	}, operations.QueryParam2One, 100, "some example header param", operations.WithServerURL("http://localhost:35123"))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -1088,12 +1064,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/tristanspeakeasy/sdk-platform-test"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = sdkplatformtest.New(sdkplatformtest.WithClient(httpClient))
 )
 ```
 

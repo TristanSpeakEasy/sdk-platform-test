@@ -18,8 +18,8 @@ const (
 
 // OneOfWithUnionDescription - A union of two types.
 type OneOfWithUnionDescription struct {
-	ExhaustiveObject *components.ExhaustiveObject `queryParam:"inline"`
-	SimpleObject     *components.SimpleObject     `queryParam:"inline"`
+	ExhaustiveObject *components.ExhaustiveObject `queryParam:"inline" name:"oneOfWithUnionDescription"`
+	SimpleObject     *components.SimpleObject     `queryParam:"inline" name:"oneOfWithUnionDescription"`
 
 	Type OneOfWithUnionDescriptionType
 }
@@ -44,17 +44,17 @@ func CreateOneOfWithUnionDescriptionSimpleObject(simpleObject components.SimpleO
 
 func (u *OneOfWithUnionDescription) UnmarshalJSON(data []byte) error {
 
-	var simpleObject components.SimpleObject = components.SimpleObject{}
-	if err := utils.UnmarshalJSON(data, &simpleObject, "", true, true); err == nil {
-		u.SimpleObject = &simpleObject
-		u.Type = OneOfWithUnionDescriptionTypeSimpleObject
+	var exhaustiveObject components.ExhaustiveObject = components.ExhaustiveObject{}
+	if err := utils.UnmarshalJSON(data, &exhaustiveObject, "", true, nil); err == nil {
+		u.ExhaustiveObject = &exhaustiveObject
+		u.Type = OneOfWithUnionDescriptionTypeExhaustiveObject
 		return nil
 	}
 
-	var exhaustiveObject components.ExhaustiveObject = components.ExhaustiveObject{}
-	if err := utils.UnmarshalJSON(data, &exhaustiveObject, "", true, true); err == nil {
-		u.ExhaustiveObject = &exhaustiveObject
-		u.Type = OneOfWithUnionDescriptionTypeExhaustiveObject
+	var simpleObject components.SimpleObject = components.SimpleObject{}
+	if err := utils.UnmarshalJSON(data, &simpleObject, "", true, nil); err == nil {
+		u.SimpleObject = &simpleObject
+		u.Type = OneOfWithUnionDescriptionTypeSimpleObject
 		return nil
 	}
 
@@ -80,18 +80,18 @@ type SimpleAllOf struct {
 	Bool *bool `json:"bool,omitempty"`
 }
 
-func (o *SimpleAllOf) GetStr() *string {
-	if o == nil {
+func (s *SimpleAllOf) GetStr() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Str
+	return s.Str
 }
 
-func (o *SimpleAllOf) GetBool() *bool {
-	if o == nil {
+func (s *SimpleAllOf) GetBool() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Bool
+	return s.Bool
 }
 
 // AllOfWithFactoredOutProperties - An object with allOf and factored out properties.
@@ -104,25 +104,25 @@ type AllOfWithFactoredOutProperties struct {
 	AnExtraProperty *string `json:"anExtraProperty,omitempty"`
 }
 
-func (o *AllOfWithFactoredOutProperties) GetAnOverridingProperty() *string {
-	if o == nil {
+func (a *AllOfWithFactoredOutProperties) GetAnOverridingProperty() *string {
+	if a == nil {
 		return nil
 	}
-	return o.AnOverridingProperty
+	return a.AnOverridingProperty
 }
 
-func (o *AllOfWithFactoredOutProperties) GetAnotherProperty() *string {
-	if o == nil {
+func (a *AllOfWithFactoredOutProperties) GetAnotherProperty() *string {
+	if a == nil {
 		return nil
 	}
-	return o.AnotherProperty
+	return a.AnotherProperty
 }
 
-func (o *AllOfWithFactoredOutProperties) GetAnExtraProperty() *string {
-	if o == nil {
+func (a *AllOfWithFactoredOutProperties) GetAnExtraProperty() *string {
+	if a == nil {
 		return nil
 	}
-	return o.AnExtraProperty
+	return a.AnExtraProperty
 }
 
 type GetPolymorphismResponseBody struct {
@@ -136,39 +136,39 @@ type GetPolymorphismResponseBody struct {
 	CircularUnion                  *components.CircularUnion       `json:"circularUnion,omitempty"`
 }
 
-func (o *GetPolymorphismResponseBody) GetOneOfWithUnionDescription() *OneOfWithUnionDescription {
-	if o == nil {
+func (g *GetPolymorphismResponseBody) GetOneOfWithUnionDescription() *OneOfWithUnionDescription {
+	if g == nil {
 		return nil
 	}
-	return o.OneOfWithUnionDescription
+	return g.OneOfWithUnionDescription
 }
 
-func (o *GetPolymorphismResponseBody) GetOneOfWithFactoredOutProperties() *components.OneOfWithFactoredOutProperties {
-	if o == nil {
+func (g *GetPolymorphismResponseBody) GetOneOfWithFactoredOutProperties() *components.OneOfWithFactoredOutProperties {
+	if g == nil {
 		return nil
 	}
-	return o.OneOfWithFactoredOutProperties
+	return g.OneOfWithFactoredOutProperties
 }
 
-func (o *GetPolymorphismResponseBody) GetSimpleAllOf() *SimpleAllOf {
-	if o == nil {
+func (g *GetPolymorphismResponseBody) GetSimpleAllOf() *SimpleAllOf {
+	if g == nil {
 		return nil
 	}
-	return o.SimpleAllOf
+	return g.SimpleAllOf
 }
 
-func (o *GetPolymorphismResponseBody) GetAllOfWithFactoredOutProperties() *AllOfWithFactoredOutProperties {
-	if o == nil {
+func (g *GetPolymorphismResponseBody) GetAllOfWithFactoredOutProperties() *AllOfWithFactoredOutProperties {
+	if g == nil {
 		return nil
 	}
-	return o.AllOfWithFactoredOutProperties
+	return g.AllOfWithFactoredOutProperties
 }
 
-func (o *GetPolymorphismResponseBody) GetCircularUnion() *components.CircularUnion {
-	if o == nil {
+func (g *GetPolymorphismResponseBody) GetCircularUnion() *components.CircularUnion {
+	if g == nil {
 		return nil
 	}
-	return o.CircularUnion
+	return g.CircularUnion
 }
 
 type GetPolymorphismResponse struct {
@@ -176,16 +176,16 @@ type GetPolymorphismResponse struct {
 	Object   *GetPolymorphismResponseBody
 }
 
-func (o *GetPolymorphismResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (g *GetPolymorphismResponse) GetHTTPMeta() components.HTTPMetadata {
+	if g == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return g.HTTPMeta
 }
 
-func (o *GetPolymorphismResponse) GetObject() *GetPolymorphismResponseBody {
-	if o == nil {
+func (g *GetPolymorphismResponse) GetObject() *GetPolymorphismResponseBody {
+	if g == nil {
 		return nil
 	}
-	return o.Object
+	return g.Object
 }

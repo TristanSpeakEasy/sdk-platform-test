@@ -26,22 +26,22 @@ type ListTest1Globals struct {
 	QueryParam1 *string `queryParam:"style=form,explode=true,name=queryParam1"`
 }
 
-func (o *ListTest1Globals) GetQueryParam1() *string {
-	if o == nil {
+func (l *ListTest1Globals) GetQueryParam1() *string {
+	if l == nil {
 		return nil
 	}
-	return o.QueryParam1
+	return l.QueryParam1
 }
 
 type ListTest1Security struct {
 	APIKey string `security:"scheme,type=apiKey,subtype=header,name=api_key,env=sdk_api_key"`
 }
 
-func (o *ListTest1Security) GetAPIKey() string {
-	if o == nil {
+func (l *ListTest1Security) GetAPIKey() string {
+	if l == nil {
 		return ""
 	}
-	return o.APIKey
+	return l.APIKey
 }
 
 // QueryParam2 - A enum query parameter.
@@ -75,50 +75,50 @@ func (e *QueryParam2) UnmarshalJSON(data []byte) error {
 }
 
 type ListTest1Request struct {
+	QueryParam1 *string `queryParam:"style=form,explode=true,name=queryParam1"`
 	// A enum query parameter.
 	QueryParam2  QueryParam2 `queryParam:"style=form,explode=true,name=queryParam2"`
 	Page         int64       `pathParam:"style=simple,explode=false,name=page"`
 	HeaderParam1 string      `header:"style=simple,explode=false,name=headerParam1"`
-	QueryParam1  *string     `queryParam:"style=form,explode=true,name=queryParam1"`
 }
 
-func (o *ListTest1Request) GetQueryParam2() QueryParam2 {
-	if o == nil {
-		return QueryParam2(0)
-	}
-	return o.QueryParam2
-}
-
-func (o *ListTest1Request) GetPage() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.Page
-}
-
-func (o *ListTest1Request) GetHeaderParam1() string {
-	if o == nil {
-		return ""
-	}
-	return o.HeaderParam1
-}
-
-func (o *ListTest1Request) GetQueryParam1() *string {
-	if o == nil {
+func (l *ListTest1Request) GetQueryParam1() *string {
+	if l == nil {
 		return nil
 	}
-	return o.QueryParam1
+	return l.QueryParam1
+}
+
+func (l *ListTest1Request) GetQueryParam2() QueryParam2 {
+	if l == nil {
+		return QueryParam2(0)
+	}
+	return l.QueryParam2
+}
+
+func (l *ListTest1Request) GetPage() int64 {
+	if l == nil {
+		return 0
+	}
+	return l.Page
+}
+
+func (l *ListTest1Request) GetHeaderParam1() string {
+	if l == nil {
+		return ""
+	}
+	return l.HeaderParam1
 }
 
 type ResultArray struct {
 	Test1 string `json:"test1"`
 }
 
-func (o *ResultArray) GetTest1() string {
-	if o == nil {
+func (r *ResultArray) GetTest1() string {
+	if r == nil {
 		return ""
 	}
-	return o.Test1
+	return r.Test1
 }
 
 // ListTest1ResponseBody - OK
@@ -133,31 +133,31 @@ func (l ListTest1ResponseBody) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListTest1ResponseBody) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"resultArray", "totalCount"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ListTest1ResponseBody) GetResultArray() []ResultArray {
-	if o == nil {
+func (l *ListTest1ResponseBody) GetResultArray() []ResultArray {
+	if l == nil {
 		return []ResultArray{}
 	}
-	return o.ResultArray
+	return l.ResultArray
 }
 
-func (o *ListTest1ResponseBody) GetTotalCount() int64 {
-	if o == nil {
+func (l *ListTest1ResponseBody) GetTotalCount() int64 {
+	if l == nil {
 		return 0
 	}
-	return o.TotalCount
+	return l.TotalCount
 }
 
-func (o *ListTest1ResponseBody) GetType() *components.Enum {
-	if o == nil {
+func (l *ListTest1ResponseBody) GetType() *components.Enum {
+	if l == nil {
 		return nil
 	}
-	return o.Type
+	return l.Type
 }
 
 type ListTest1Response struct {
@@ -168,16 +168,16 @@ type ListTest1Response struct {
 	Next func() (*ListTest1Response, error)
 }
 
-func (o *ListTest1Response) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (l *ListTest1Response) GetHTTPMeta() components.HTTPMetadata {
+	if l == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return l.HTTPMeta
 }
 
-func (o *ListTest1Response) GetObject() *ListTest1ResponseBody {
-	if o == nil {
+func (l *ListTest1Response) GetObject() *ListTest1ResponseBody {
+	if l == nil {
 		return nil
 	}
-	return o.Object
+	return l.Object
 }

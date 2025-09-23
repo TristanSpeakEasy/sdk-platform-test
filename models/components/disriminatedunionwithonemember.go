@@ -16,7 +16,7 @@ const (
 )
 
 type DisriminatedUnionWithOneMember struct {
-	ExhaustiveObject *ExhaustiveObject `queryParam:"inline"`
+	ExhaustiveObject *ExhaustiveObject `queryParam:"inline" name:"DisriminatedUnionWithOneMember"`
 
 	Type DisriminatedUnionWithOneMemberType
 }
@@ -47,7 +47,7 @@ func (u *DisriminatedUnionWithOneMember) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "type1":
 		exhaustiveObject := new(ExhaustiveObject)
-		if err := utils.UnmarshalJSON(data, &exhaustiveObject, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &exhaustiveObject, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == type1) type ExhaustiveObject within DisriminatedUnionWithOneMember: %w", string(data), err)
 		}
 
